@@ -8,7 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import type { TrackingCache, TrackingStoreState } from "@/types";
-import { sanitizeRecipientName } from "@/utils/formatters/date.formatter";
+import { sanitizeRecipientName } from "@core/domain/common/utils/formatters/date.formatter";
 import { TRACKING_STORAGE_KEY } from "@/utils/constants";
 
 type TrackingResultInput = Omit<TrackingCache, "userName">;

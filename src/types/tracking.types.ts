@@ -21,7 +21,7 @@ export type PackageSummary = {
   orderNumber: string;
   currentStatus: PackageStatus;
   lastEvent: TrackingEvent;
-  eventCount: number;
+  eventCount?: number;
 };
 
 export type PackageDetail = {

@@ -1,5 +1,5 @@
 import type { CpfValidationResult } from "@/types";
-import { onlyDigits } from "@/utils/formatters/cpf.formatter";
+import { onlyDigits } from "@core/domain/common/utils/formatters/cpf.formatter";
 
 function calculateCpfDigit(base: string, factor: number): number {
   const total = base

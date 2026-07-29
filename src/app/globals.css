@@ -43,3 +43,10 @@ input {
   background: #bfdbfe;
   color: #0f172a;
 }
+
+input::-webkit-calendar-picker-indicator,
+input::-webkit-list-button {
+  display: none !important;
+  opacity: 0 !important;
+  appearance: none !important;
+}

@@ -5,9 +5,9 @@ import { useRouter } from "next/navigation";
 import { useTracking } from "@/features/tracking/provider/TrackingProvider";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
-import type { TrackingError, TrackingResponse } from "@/types";
-import { maskCpf, onlyDigits } from "@/utils/formatters/cpf.formatter";
-import { validateCpf } from "@/utils/validators/cpf.validator";
+import type { PackageSummary } from "@/types";
+import { maskCpf, onlyDigits } from "@core/domain/common/utils/formatters/cpf.formatter";
+import { validateCpf } from "@core/domain/common/utils/validators/cpf.validator";
 
 function getValidationMessage(cpf: string, touched: boolean): string {
   if (!touched) {
@@ -29,7 +29,7 @@ function getValidationMessage(cpf: string, touched: boolean): string {
 
 export function CpfSearchForm() {
   const router = useRouter();
-  const { setTrackingResult } = useTracking();
+  const tracking = useTracking();
   const [cpf, setCpf] = useState("");
   const [touched, setTouched] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -52,38 +52,27 @@ export function CpfSearchForm() {
     setError("");
 
     try {
-      const response = await fetch("/api/tracking", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          cpf: validation.cleaned,
-        }),
-      });
-      const payload = (await response.json()) as
-        | TrackingResponse
-        | TrackingError;
-
-      if (!payload.success) {
-        setError(
-          payload.error ||
-            "Não foi possível buscar as encomendas no momento. Tente novamente.",
-        );
-        return;
-      }
+      const response = await fetch(
+        `/api/tracking?cpf=${encodeURIComponent(validation.cleaned)}`,
+      );
 
       if (!response.ok) {
+        const errorBody = (await response.json().catch(() => null)) as
+          | { error?: string }
+          | null;
         setError(
+          errorBody?.error ||
           "Não foi possível buscar as encomendas no momento. Tente novamente.",
         );
         return;
       }
 
-      setTrackingResult({
+      const packages = (await response.json()) as PackageSummary[];
+
+      tracking.setTrackingResult({
         cpf: validation.cleaned,
-        payload: payload.data,
-        scrapedAt: payload.scrapedAt,
+        payload: { packages },
+        scrapedAt: new Date().toISOString(),
       });
       router.push(`/tracking?cpf=${encodeURIComponent(validation.cleaned)}`);
     } catch {
@@ -98,10 +87,12 @@ export function CpfSearchForm() {
       <div className="space-y-2">
         <Input
           id="cpf"
+          name="cpf"
           aria-label="CPF"
           type="text"
           inputMode="numeric"
           autoComplete="off"
+          list={tracking.cpf ? "recent-cpf-list" : undefined}
           placeholder="000.000.000-00"
           value={cpf}
           hasError={Boolean(validationMessage)}
@@ -116,6 +107,12 @@ export function CpfSearchForm() {
           aria-invalid={Boolean(validationMessage)}
           aria-describedby={validationMessage ? "cpf-error" : undefined}
         />
+        {tracking.cpf ? (
+          <datalist id="recent-cpf-list">
+            <option value={maskCpf(tracking.cpf)} />
+          </datalist>
+        ) : null}
+
         {validationMessage ? (
           <p id="cpf-error" className="text-sm text-red-600">
             {validationMessage}

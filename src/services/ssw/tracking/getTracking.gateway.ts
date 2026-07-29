@@ -1,7 +1,10 @@
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import * as cheerio from "cheerio";
+import { NextResponse } from "next/server";
 import { getRuntimeEnv } from "@/config";
+import { getTrackingByCpf } from "@core/domain/tracking/tracking";
+import { getTrackingDetailById } from "@core/domain/tracking/tracking-detail";
 import type { ScraperError, SswFormFields } from "@/types";
 import { REQUEST_TIMEOUT_MS, SSW_BASE_URL, SSW_TRACKING_URL } from "@/utils/constants";
 
@@ -30,9 +33,9 @@ async function runCurl(args: string[], attempt = 0): Promise<string> {
   } catch (error) {
     const exitCode =
       typeof error === "object" &&
-      error !== null &&
-      "code" in error &&
-      typeof error.code === "number"
+        error !== null &&
+        "code" in error &&
+        typeof error.code === "number"
         ? error.code
         : undefined;
 
@@ -173,4 +176,47 @@ export async function scrapeTrackingDetail(detailPath: string): Promise<string> 
 
   assertHtmlLooksUsable(html);
   return html;
+}
+
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const cpf = searchParams.get("cpf") ?? "";
+
+  try {
+    const packages = await getTrackingByCpf(cpf);
+    return NextResponse.json(packages);
+  } catch (error) {
+    const status =
+      error instanceof Error && "code" in error && String(error.code) === "INVALID_CPF"
+        ? 400
+        : 500;
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : "Erro interno." },
+      { status },
+    );
+  }
+}
+
+export async function GET_DETAIL(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const cpf = searchParams.get("cpf") ?? "";
+  const trackingId = searchParams.get("trackingId") ?? "";
+
+  try {
+    const data = await getTrackingDetailById(cpf, trackingId);
+    return NextResponse.json(data);
+  } catch (error) {
+    const status =
+      error instanceof Error && "code" in error
+        ? String(error.code) === "INVALID_CPF"
+          ? 400
+          : String(error.code) === "TRACKING_NOT_FOUND"
+            ? 404
+            : 500
+        : 500;
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : "Erro interno." },
+      { status },
+    );
+  }
 }

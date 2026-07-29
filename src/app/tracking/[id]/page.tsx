@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import TrackingDetail from "@/components/pages/TrackingDetail";
-import { validateCpf } from "@/utils/validators/cpf.validator";
+import { validateCpf } from "@core/domain/common/utils/validators/cpf.validator";
 
 type TrackingDetailOrLegacyPageProps = {
   params: Promise<{

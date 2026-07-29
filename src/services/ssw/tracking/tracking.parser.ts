@@ -9,7 +9,7 @@ import { STATUS_KEYWORDS } from "@/utils/constants";
 import {
   normalizeText,
   parseSswDateTime,
-} from "@/utils/formatters/date.formatter";
+} from "@core/domain/common/utils/formatters/date.formatter";
 
 function createTrackingId(detailPath: string, nfNumber: string, orderNumber: string): string {
   const detailId = detailPath.match(/[?&]id=([^&]+)/)?.[1];

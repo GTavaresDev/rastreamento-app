@@ -41,16 +41,11 @@ export function TrackingDetailView() {
       setError("");
 
       try {
-        const response = await fetch("/api/tracking/detail", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            cpf: tracking.cpf,
-            trackingId,
-          }),
+        const params = new URLSearchParams({
+          cpf: tracking.cpf,
+          trackingId,
         });
+        const response = await fetch(`/api/tracking/detail?${params}`);
 
         const payload = (await response.json()) as
           | TrackingDetailResponse

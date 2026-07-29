@@ -1,7 +1,7 @@
 import type { PackageStatus } from "@/types";
 import { cn } from "@/utils";
 import { STATUS_STYLES } from "@/utils/constants";
-import { getStatusLabel } from "@/utils/formatters/date.formatter";
+import { getStatusLabel } from "@core/domain/common/utils/formatters/date.formatter";
 
 type StatusBadgeProps = {
   status: PackageStatus;

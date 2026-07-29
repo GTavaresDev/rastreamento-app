@@ -3,7 +3,7 @@
 import type { PackageSummary } from "@/types";
 import { PackageCard } from "@/features/tracking/components/PackageCard";
 import { StatusBadge } from "@/features/tracking/components/StatusBadge";
-import { formatRelativeDate } from "@/utils/formatters/date.formatter";
+import { formatRelativeDate } from "@core/domain/common/utils/formatters/date.formatter";
 import { useRouter } from "next/navigation";
 
 type PackageListProps = {

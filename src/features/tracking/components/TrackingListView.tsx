@@ -7,7 +7,7 @@ import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { PackageListLoading } from "@/features/tracking/components/TrackingLoadingStates";
-import { maskCpfHidden } from "@/utils/formatters/cpf.formatter";
+import { maskCpf } from "@core/domain/common/utils/formatters/cpf.formatter";
 
 type TrackingListViewProps = {
   cpf: string;
@@ -75,7 +75,7 @@ export function TrackingListView({ cpf }: TrackingListViewProps) {
                 Lista de encomendas
               </h1>
               <p className="text-sm text-slate-500">
-                CPF: {maskCpfHidden(cpf ?? "")}
+                CPF: {maskCpf(cpf ?? "")}
               </p>
             </div>
             <p className="text-sm font-medium text-slate-400 sm:text-right">
