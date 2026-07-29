@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { PackageList } from "@/features/tracking/components/PackageList";
-import { useTracking } from "@/features/tracking/provider/TrackingProvider";
+import { PackageList } from "@/components/tracking/PackageList";
+import { useTracking } from "@/components/tracking/TrackingProvider";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { PackageListLoading } from "@/features/tracking/components/TrackingLoadingStates";
+import { PackageListLoading } from "@/components/tracking/TrackingLoadingStates";
 import { maskCpf } from "@core/domain/common/utils/formatters/cpf.formatter";
 
 type TrackingListViewProps = {

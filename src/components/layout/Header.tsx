@@ -3,14 +3,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useTracking } from "@/features/tracking/provider/TrackingProvider";
+import { useTracking } from "@/components/tracking/TrackingProvider";
 import { APP_NAME } from "@/utils/constants";
 
 export function Header() {
   const pathname = usePathname();
   const { userName } = useTracking();
   const shouldShowUserName =
-    pathname === "/tracking" || pathname.startsWith("/tracking/");
+    pathname === "/tracking" ||
+    pathname.startsWith("/tracking/") ||
+    pathname === "/rastreamento" ||
+    pathname.startsWith("/rastreamento/");
 
   return (
     <header className="border-b border-slate-200/80 bg-white/80 backdrop-blur">

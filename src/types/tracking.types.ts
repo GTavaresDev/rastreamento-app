@@ -51,6 +51,7 @@ export type TrackingListItem = {
 export type TrackingCache = {
   cpf: string;
   payload: TrackingPayload;
+  details?: Record<string, PackageDetail>;
   scrapedAt: string;
   userName: string | null;
 };

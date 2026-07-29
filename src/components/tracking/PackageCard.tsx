@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { PackageSummary } from "@/types";
 import { formatRelativeDate } from "@core/domain/common/utils/formatters/date.formatter";
-import { StatusBadge } from "@/features/tracking/components/StatusBadge";
+import { StatusBadge } from "@/components/tracking/StatusBadge";
 
 type PackageCardProps = {
   item: PackageSummary;
@@ -11,7 +11,7 @@ type PackageCardProps = {
 export function PackageCard({ item, scrapedAt }: PackageCardProps) {
   return (
     <Link
-      href={`/tracking/${item.id}`}
+      href={`/rastreamento/detalhes/${item.id}`}
       className="group block rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md focus-visible:ring-2 focus-visible:ring-slate-300 focus-visible:ring-offset-2 sm:p-5"
     >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">

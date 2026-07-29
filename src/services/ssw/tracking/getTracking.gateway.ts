@@ -1,14 +1,10 @@
-import { execFile } from "node:child_process";
-import { promisify } from "node:util";
 import * as cheerio from "cheerio";
 import { NextResponse } from "next/server";
-import { getRuntimeEnv } from "@/config";
 import { getTrackingByCpf } from "@core/domain/tracking/tracking";
 import { getTrackingDetailById } from "@core/domain/tracking/tracking-detail";
 import type { ScraperError, SswFormFields } from "@/types";
 import { REQUEST_TIMEOUT_MS, SSW_BASE_URL, SSW_TRACKING_URL } from "@/utils/constants";
 
-const execFileAsync = promisify(execFile);
 const USER_AGENT =
   "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123 Safari/537.36";
 
@@ -22,28 +18,49 @@ function createScraperError(
   return error;
 }
 
-async function runCurl(args: string[], attempt = 0): Promise<string> {
+async function fetchSsw(
+  url: string,
+  options: RequestInit = {},
+  attempt = 0,
+): Promise<string> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
   try {
-    const { stdout } = await execFileAsync("curl", args, {
-      maxBuffer: 2_000_000,
-      env: getRuntimeEnv(),
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal,
+      headers: {
+        Accept: "text/html,application/xhtml+xml",
+        "User-Agent": USER_AGENT,
+        Referer: SSW_TRACKING_URL,
+        ...options.headers,
+      },
     });
 
-    return stdout;
-  } catch (error) {
-    const exitCode =
-      typeof error === "object" &&
-        error !== null &&
-        "code" in error &&
-        typeof error.code === "number"
-        ? error.code
-        : undefined;
+    clearTimeout(timeoutId);
 
-    if (exitCode === 28 && attempt === 0) {
-      return runCurl(args, 1);
+    if (!response.ok) {
+      throw createScraperError(
+        "SSW_UNAVAILABLE",
+        `O SSW respondeu com status HTTP ${response.status}.`,
+      );
     }
 
-    if (exitCode === 28) {
+    const arrayBuffer = await response.arrayBuffer();
+    const html = new TextDecoder("iso-8859-1").decode(arrayBuffer);
+    return html;
+  } catch (error) {
+    clearTimeout(timeoutId);
+
+    if (
+      error instanceof Error &&
+      (error.name === "AbortError" || error.name === "TimeoutError")
+    ) {
+      if (attempt === 0) {
+        return fetchSsw(url, options, 1);
+      }
+
       throw createScraperError(
         "SSW_UNAVAILABLE",
         "O SSW não respondeu dentro do tempo limite.",
@@ -51,7 +68,15 @@ async function runCurl(args: string[], attempt = 0): Promise<string> {
       );
     }
 
-    throw createScraperError("SCRAPING_FAILED", "Falha ao consultar o SSW.", error);
+    if (error instanceof Error && "code" in error) {
+      throw error;
+    }
+
+    throw createScraperError(
+      "SCRAPING_FAILED",
+      "Falha ao consultar o SSW.",
+      error,
+    );
   }
 }
 
@@ -73,19 +98,7 @@ function assertHtmlLooksUsable(html: string): void {
 }
 
 async function loadTrackingForm(): Promise<SswFormFields> {
-  const html = await runCurl([
-    "-s",
-    "-L",
-    "--max-time",
-    String(Math.floor(REQUEST_TIMEOUT_MS / 1000)),
-    "-H",
-    "Accept: text/html,application/xhtml+xml",
-    "-H",
-    `User-Agent: ${USER_AGENT}`,
-    "-e",
-    SSW_TRACKING_URL,
-    SSW_TRACKING_URL,
-  ]);
+  const html = await fetchSsw(SSW_TRACKING_URL);
   const $ = cheerio.load(html);
   const form = $("form").first();
 
@@ -135,44 +148,27 @@ export async function scrapeTrackingByCpf(cpf: string): Promise<string> {
     ...form.hiddenFields,
     [form.cpfFieldName]: cpf,
   }).toString();
-  const html = await runCurl([
-    "-s",
-    "-L",
-    "--max-time",
-    String(Math.floor(REQUEST_TIMEOUT_MS / 1000)),
-    "-H",
-    "Accept: text/html,application/xhtml+xml",
-    "-H",
-    `User-Agent: ${USER_AGENT}`,
-    "-H",
-    "Content-Type: application/x-www-form-urlencoded",
-    "-H",
-    `Origin: ${SSW_BASE_URL}`,
-    "-e",
-    SSW_TRACKING_URL,
-    "--data",
+
+  const url = `${SSW_BASE_URL}${form.action}`;
+  const html = await fetchSsw(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      Origin: SSW_BASE_URL,
+    },
     body,
-    `${SSW_BASE_URL}${form.action}`,
-  ]);
+  });
 
   assertHtmlLooksUsable(html);
   return html;
 }
 
 export async function scrapeTrackingDetail(detailPath: string): Promise<string> {
-  const html = await runCurl([
-    "-s",
-    "-L",
-    "--max-time",
-    String(Math.floor(REQUEST_TIMEOUT_MS / 1000)),
-    "-H",
-    "Accept: text/html,application/xhtml+xml",
-    "-H",
-    `User-Agent: ${USER_AGENT}`,
-    "-e",
-    SSW_TRACKING_URL,
-    detailPath.startsWith("http") ? detailPath : `${SSW_BASE_URL}${detailPath}`,
-  ]);
+  const url = detailPath.startsWith("http")
+    ? detailPath
+    : `${SSW_BASE_URL}${detailPath}`;
+
+  const html = await fetchSsw(url);
 
   assertHtmlLooksUsable(html);
   return html;

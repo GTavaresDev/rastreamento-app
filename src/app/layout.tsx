@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
-import { TrackingProvider } from "@/features/tracking/provider/TrackingProvider";
+import { TrackingProvider } from "@/components/tracking/TrackingProvider";
 import { APP_NAME } from "@/utils/constants";
 import "./globals.css";
 

@@ -1,8 +1,8 @@
 "use client";
 
 import type { PackageSummary } from "@/types";
-import { PackageCard } from "@/features/tracking/components/PackageCard";
-import { StatusBadge } from "@/features/tracking/components/StatusBadge";
+import { PackageCard } from "@/components/tracking/PackageCard";
+import { StatusBadge } from "@/components/tracking/StatusBadge";
 import { formatRelativeDate } from "@core/domain/common/utils/formatters/date.formatter";
 import { useRouter } from "next/navigation";
 
@@ -53,11 +53,11 @@ export function PackageList({ items, scrapedAt }: PackageListProps) {
                   key={item.id}
                   className="cursor-pointer align-top transition-colors hover:bg-slate-50/70 focus-visible:bg-slate-50"
                   tabIndex={0}
-                  onClick={() => router.push(`/tracking/${item.id}`)}
+                  onClick={() => router.push(`/rastreamento/detalhes/${item.id}`)}
                   onKeyDown={(event) => {
                     if (event.key === "Enter" || event.key === " ") {
                       event.preventDefault();
-                      router.push(`/tracking/${item.id}`);
+                      router.push(`/rastreamento/detalhes/${item.id}`);
                     }
                   }}
                 >

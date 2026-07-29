@@ -1,4 +1,4 @@
-import { CpfSearchForm } from "@/features/tracking/components/CpfSearchForm";
+import { CpfSearchForm } from "@/components/tracking/CpfSearchForm";
 import { Card } from "@/components/ui/Card";
 
 export default function Home() {

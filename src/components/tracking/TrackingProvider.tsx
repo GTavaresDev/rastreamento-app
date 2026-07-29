@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import type { TrackingCache, TrackingStoreState } from "@/types";
+import type { PackageDetail, TrackingCache, TrackingStoreState } from "@/types";
 import { sanitizeRecipientName } from "@core/domain/common/utils/formatters/date.formatter";
 import { TRACKING_STORAGE_KEY } from "@/utils/constants";
 
@@ -16,6 +16,7 @@ type TrackingResultInput = Omit<TrackingCache, "userName">;
 type TrackingContextValue = TrackingStoreState & {
   setTrackingResult: (cache: TrackingResultInput) => void;
   clearTrackingResult: () => void;
+  saveDetail: (trackingId: string, detail: PackageDetail) => void;
 };
 
 const emptyState: TrackingStoreState = {
@@ -23,6 +24,7 @@ const emptyState: TrackingStoreState = {
   payload: {
     packages: [],
   },
+  details: {},
   scrapedAt: "",
   userName: null,
   hydrated: false,
@@ -61,6 +63,7 @@ export function TrackingProvider({ children }: { children: ReactNode }) {
       const cache: TrackingCache = {
         cpf: parsed.cpf,
         payload: parsed.payload,
+        details: parsed.details ?? {},
         scrapedAt: parsed.scrapedAt,
         userName: parsed.userName ?? getUserName(parsed),
       };
@@ -82,6 +85,7 @@ export function TrackingProvider({ children }: { children: ReactNode }) {
   function setTrackingResult(cache: TrackingResultInput) {
     const nextCache: TrackingCache = {
       ...cache,
+      details: cache.details ?? {},
       userName: getUserName(cache),
     };
 
@@ -92,6 +96,33 @@ export function TrackingProvider({ children }: { children: ReactNode }) {
     setState({
       ...nextCache,
       hydrated: true,
+    });
+  }
+
+  function saveDetail(trackingId: string, detail: PackageDetail) {
+    setState((current) => {
+      const nextDetails = {
+        ...(current.details ?? {}),
+        [trackingId]: detail,
+      };
+
+      const nextState: TrackingStoreState = {
+        ...current,
+        details: nextDetails,
+      };
+
+      try {
+        const toPersist: Partial<TrackingStoreState> = { ...nextState };
+        delete toPersist.hydrated;
+        window.sessionStorage.setItem(
+          TRACKING_STORAGE_KEY,
+          JSON.stringify(toPersist),
+        );
+      } catch {
+        // ignore storage quota errors
+      }
+
+      return nextState;
     });
   }
 
@@ -109,6 +140,7 @@ export function TrackingProvider({ children }: { children: ReactNode }) {
         ...state,
         setTrackingResult,
         clearTrackingResult,
+        saveDetail,
       }}
     >
       {children}

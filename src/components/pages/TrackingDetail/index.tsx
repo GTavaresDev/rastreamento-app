@@ -1,4 +1,4 @@
-import { TrackingDetailView } from "@/features/tracking/components/TrackingDetailView";
+import { TrackingDetailView } from "@/components/tracking/TrackingDetailView";
 
 export default function TrackingDetailPage() {
   return <TrackingDetailView />;

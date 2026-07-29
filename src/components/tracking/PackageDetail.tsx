@@ -1,7 +1,7 @@
 import type { PackageDetail as PackageDetailType } from "@/types";
 import { Card } from "@/components/ui/Card";
-import { StatusBadge } from "@/features/tracking/components/StatusBadge";
-import { TrackingTimeline } from "@/features/tracking/components/TrackingTimeline";
+import { StatusBadge } from "@/components/tracking/StatusBadge";
+import { TrackingTimeline } from "@/components/tracking/TrackingTimeline";
 
 type PackageDetailProps = {
   item: PackageDetailType;

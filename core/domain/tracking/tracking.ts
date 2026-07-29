@@ -4,15 +4,27 @@ import { validateCpf } from "@core/domain/common/utils/validators/cpf.validator"
 import { logError } from "@core/domain/common/utils/error/logger";
 import type { PackageSummary, TrackingListItem } from "@/types";
 
-async function fetchTrackingListByCpf(cpf: string): Promise<TrackingListItem[]> {
+type ListCacheEntry = { data: TrackingListItem[]; expiresAt: number };
+const listCache = new Map<string, ListCacheEntry>();
+const CACHE_TTL_MS = 5 * 60 * 1000;
+
+export async function fetchTrackingListByCpf(cpf: string): Promise<TrackingListItem[]> {
   const validation = validateCpf(cpf);
 
   if (!validation.valid) {
     logError("INVALID_CPF", "CPF inválido.");
   }
 
+  const cached = listCache.get(validation.cleaned);
+  if (cached && Date.now() < cached.expiresAt) {
+    return cached.data;
+  }
+
   const listHtml = await scrapeTrackingByCpf(validation.cleaned);
-  return parseTrackingListHtml(listHtml);
+  const parsed = parseTrackingListHtml(listHtml);
+
+  listCache.set(validation.cleaned, { data: parsed, expiresAt: Date.now() + CACHE_TTL_MS });
+  return parsed;
 }
 
 export async function getTrackingByCpf(cpf: string): Promise<PackageSummary[]> {
@@ -28,4 +40,3 @@ export async function getTrackingByCpf(cpf: string): Promise<PackageSummary[]> {
     eventCount: 1,
   }));
 }
-

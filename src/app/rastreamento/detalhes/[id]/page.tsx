@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import TrackingDetail from "@/components/pages/TrackingDetail";
 import { validateCpf } from "@core/domain/common/utils/validators/cpf.validator";
 
-type TrackingDetailOrLegacyPageProps = {
+type RastreamentoDetalhesPageProps = {
   params: Promise<{
     id: string;
   }>;
@@ -16,9 +16,9 @@ function getSegment(value: string | string[]) {
   return value.trim();
 }
 
-export default async function TrackingDetailOrLegacyPage({
+export default async function RastreamentoDetalhesPage({
   params,
-}: TrackingDetailOrLegacyPageProps) {
+}: RastreamentoDetalhesPageProps) {
   const resolvedParams = await params;
   const id = getSegment(resolvedParams.id);
 
@@ -29,7 +29,7 @@ export default async function TrackingDetailOrLegacyPage({
   const cpfValidation = validateCpf(id);
 
   if (cpfValidation.valid) {
-    redirect(`/tracking?cpf=${encodeURIComponent(cpfValidation.cleaned)}`);
+    redirect(`/rastreamento/${encodeURIComponent(cpfValidation.cleaned)}`);
   }
 
   return <TrackingDetail />;

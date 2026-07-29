@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { PackageDetail } from "@/features/tracking/components/PackageDetail";
-import { PackageDetailLoading } from "@/features/tracking/components/TrackingLoadingStates";
-import { useTracking } from "@/features/tracking/provider/TrackingProvider";
+import { PackageDetail } from "@/components/tracking/PackageDetail";
+import { PackageDetailLoading } from "@/components/tracking/TrackingLoadingStates";
+import { useTracking } from "@/components/tracking/TrackingProvider";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 import type {
@@ -17,20 +17,27 @@ import type {
 export function TrackingDetailView() {
   const params = useParams<{ id: string }>();
   const trackingId = Array.isArray(params.id) ? params.id[0] : params.id;
-  const tracking = useTracking();
+  const { hydrated, cpf, details, saveDetail } = useTracking();
   const [item, setItem] = useState<PackageDetailType | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (!tracking.hydrated) {
+    if (!hydrated) {
       return;
     }
 
-    if (!tracking.cpf || !trackingId) {
+    if (!cpf || !trackingId) {
       setItem(null);
       setLoading(false);
       setError("Dados não disponíveis. Busque novamente pelo CPF.");
+      return;
+    }
+
+    const cachedDetail = details?.[trackingId];
+    if (cachedDetail) {
+      setItem(cachedDetail);
+      setLoading(false);
       return;
     }
 
@@ -42,7 +49,7 @@ export function TrackingDetailView() {
 
       try {
         const params = new URLSearchParams({
-          cpf: tracking.cpf,
+          cpf,
           trackingId,
         });
         const response = await fetch(`/api/tracking/detail?${params}`);
@@ -61,7 +68,7 @@ export function TrackingDetailView() {
             payload.success
               ? "Não foi possível carregar os detalhes da encomenda."
               : payload.error ||
-                  "Não foi possível carregar os detalhes da encomenda.",
+              "Não foi possível carregar os detalhes da encomenda.",
           );
           return;
         }
@@ -71,6 +78,7 @@ export function TrackingDetailView() {
         }
 
         setItem(payload.data);
+        saveDetail(trackingId, payload.data);
       } catch {
         if (!active) {
           return;
@@ -90,9 +98,9 @@ export function TrackingDetailView() {
     return () => {
       active = false;
     };
-  }, [tracking.hydrated, tracking.cpf, trackingId]);
+  }, [hydrated, cpf, trackingId, details, saveDetail]);
 
-  if (!tracking.hydrated || loading) {
+  if (!hydrated || loading) {
     return <PackageDetailLoading />;
   }
 
@@ -113,8 +121,8 @@ export function TrackingDetailView() {
     );
   }
 
-  const backHref = tracking.cpf
-    ? `/tracking?cpf=${encodeURIComponent(tracking.cpf)}`
+  const backHref = cpf
+    ? `/rastreamento/${encodeURIComponent(cpf)}`
     : "/";
 
   return (

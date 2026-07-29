@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { useTracking } from "@/features/tracking/provider/TrackingProvider";
+import { useTracking } from "@/components/tracking/TrackingProvider";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import type { PackageSummary } from "@/types";
@@ -48,6 +48,14 @@ export function CpfSearchForm() {
       return;
     }
 
+    if (
+      tracking.cpf === validation.cleaned &&
+      tracking.payload.packages.length > 0
+    ) {
+      router.push(`/rastreamento/${encodeURIComponent(validation.cleaned)}`);
+      return;
+    }
+
     setLoading(true);
     setError("");
 
@@ -74,7 +82,7 @@ export function CpfSearchForm() {
         payload: { packages },
         scrapedAt: new Date().toISOString(),
       });
-      router.push(`/tracking?cpf=${encodeURIComponent(validation.cleaned)}`);
+      router.push(`/rastreamento/${encodeURIComponent(validation.cleaned)}`);
     } catch {
       setError("Falha de rede ao consultar o rastreamento. Tente novamente.");
     } finally {
