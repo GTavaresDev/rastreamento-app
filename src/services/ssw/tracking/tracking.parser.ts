@@ -110,7 +110,7 @@ export function parseTrackingListHtml(html: string): TrackingListItem[] {
   const rows = [...html.matchAll(/<tr[^>]*onclick="opx\('([^']+)'\)"[^>]*>([\s\S]*?)<\/tr>/gi)];
 
   return rows
-    .map((match) => {
+    .map((match): TrackingListItem | null => {
       const rowPath = match[1] ?? "";
       const rowHtml = match[2] ?? "";
       const cells = [...rowHtml.matchAll(/<td\b[^>]*>([\s\S]*?)<\/td>/gi)];
@@ -145,6 +145,8 @@ export function parseTrackingListHtml(html: string): TrackingListItem[] {
           dateTime,
           location,
           unit,
+          title,
+          detail,
           description: composeDescription(title, detail),
           status,
         },
@@ -182,6 +184,8 @@ export function parseTrackingDetailHtml(
           dateTime: buildDateTime(dateLines),
           location: locationLines[0] ?? fallback.lastEvent.location,
           unit: locationLines[1] ?? fallback.lastEvent.unit,
+          title,
+          detail,
           description: composeDescription(title, detail),
           status,
         } satisfies TrackingEvent;

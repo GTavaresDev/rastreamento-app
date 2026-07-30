@@ -2,7 +2,7 @@
 
 Este arquivo deixou de concentrar toda a explicação da refatoração em um relatório único. O conteúdo histórico foi revisado e distribuído em documentos independentes, organizados por alteração técnica.
 
-Não existe separação por “primeira” ou “segunda alteração”. Todos os arquivos ficam diretamente em `docs/`, e os PDFs correspondentes ficam diretamente em `output/pdf/`.
+Não existe separação por “primeira” ou “segunda alteração”. Todos os arquivos ficam diretamente em `documents/docs/`, e os PDFs correspondentes ficam diretamente em `documents/pdf/`.
 
 ## Documentos disponíveis
 
@@ -19,8 +19,9 @@ Não existe separação por “primeira” ou “segunda alteração”. Todos o
 | `09_INVENTARIO_VALIDACAO_E_RECOMENDACOES` | inventário do diff atual, validações e checklist |
 | `10_ARQUITETURA_CORE_E_INTEGRACAO_SSW` | separação do service central em casos de uso e integração específica |
 | `11_OTIMIZACAO_LISTAGEM_E_DETALHE_SOB_DEMANDA` | remoção das consultas antecipadas de todos os detalhes |
+| `12_REESTRUTURACAO_VISUAL_NAVEGACAO_E_EXPERIENCIA_DE_RASTREAMENTO` | novo shell de navegação, busca no header, tabela filtrável e detalhe progressivo da encomenda |
 
-Cada item possui um arquivo `.docx` em `docs/` e um arquivo `.pdf` com o mesmo nome em `output/pdf/`.
+Cada item possui um arquivo `.docx` em `documents/docs/` e um arquivo `.pdf` com o mesmo nome em `documents/pdf/`.
 
 ## Como o conteúdo deste relatório foi reaproveitado
 
@@ -40,4 +41,4 @@ As demais informações foram incorporadas sem criar duplicatas:
 
 ## Referências de comparação
 
-Os documentos 10 e 11 preservam explicitamente a origem histórica registrada no relatório original. Os documentos 01 a 09 analisam o diff atual contra `f7d49ae`. Essa informação aparece como metadado técnico dentro de cada arquivo, sem organizar os artefatos em pastas ou grupos de “primeira” e “segunda” alteração.
+Os documentos 10 e 11 preservam explicitamente a origem histórica registrada no relatório original. Os documentos 01 a 09 analisam o diff atual contra `f7d49ae`. O documento 12 registra o working tree da branch `v2-rastreamento` comparado ao commit `9f27ca51b152077f6736a247a0be9cb726aa2799`. Essa informação aparece como metadado técnico dentro de cada arquivo, sem organizar os artefatos em pastas ou grupos de “primeira” e “segunda” alteração.

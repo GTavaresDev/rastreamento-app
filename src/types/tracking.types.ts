@@ -10,6 +10,8 @@ export type TrackingEvent = {
   dateTime: string;
   location: string;
   unit: string;
+  title?: string;
+  detail?: string;
   description: string;
   status: PackageStatus;
 };
