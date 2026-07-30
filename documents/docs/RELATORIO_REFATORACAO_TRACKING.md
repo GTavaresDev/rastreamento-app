@@ -20,6 +20,7 @@ Não existe separação por “primeira” ou “segunda alteração”. Todos o
 | `10_ARQUITETURA_CORE_E_INTEGRACAO_SSW` | separação do service central em casos de uso e integração específica |
 | `11_OTIMIZACAO_LISTAGEM_E_DETALHE_SOB_DEMANDA` | remoção das consultas antecipadas de todos os detalhes |
 | `12_REESTRUTURACAO_VISUAL_NAVEGACAO_E_EXPERIENCIA_DE_RASTREAMENTO` | novo shell de navegação, busca no header, tabela filtrável e detalhe progressivo da encomenda |
+| `13_REORGANIZACAO_ARQUITETURAL_E_IDENTIDADE_DO_USUARIO` | reestruturação da camada core/infra, eliminação de redundâncias e integração do nome do usuário |
 
 Cada item possui um arquivo `.docx` em `documents/docs/` e um arquivo `.pdf` com o mesmo nome em `documents/pdf/`.
 

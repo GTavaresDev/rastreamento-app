@@ -3,7 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, PackageSearch, Truck } from "lucide-react";
+import { useEffect, useState } from "react";
+import { LayoutDashboard, PackageSearch, User, LogOut } from "lucide-react";
 
 import {
   Sidebar,
@@ -17,6 +18,8 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { APP_NAME } from "@/utils/constants";
+import { getStoredUserName, getStoredCpf } from "@core/infra/store/userStore";
+import { maskCpf } from "@core/domain/common/utils/formatters/cpf.formatter";
 
 type NavItem = {
   title: string;
@@ -41,6 +44,15 @@ const items: NavItem[] = [
 
 export function AppSidebar() {
   const pathname = usePathname();
+  const [userName, setUserName] = useState<string>("");
+  const [userCpf, setUserCpf] = useState<string>("");
+
+  useEffect(() => {
+    const storedName = getStoredUserName();
+    const storedCpf = getStoredCpf();
+    if (storedName) setUserName(storedName);
+    if (storedCpf) setUserCpf(maskCpf(storedCpf));
+  }, [pathname]);
 
   function isItemActive(item: NavItem) {
     if (item.matchPrefix) {
@@ -107,18 +119,27 @@ export function AppSidebar() {
       </SidebarContent>
 
       <SidebarFooter className="border-t border-sidebar-border p-4">
-        <div className="flex items-center gap-3 rounded-xl bg-slate-100/70 p-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-900 text-white">
-            <Truck className="h-5 w-5 text-white" />
+        <div className="flex items-center justify-between gap-3 rounded-xl bg-slate-100/80 p-3">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-900 text-white font-bold text-sm">
+              {userName ? userName.charAt(0).toUpperCase() : <User className="h-4 w-4" />}
+            </div>
+            <div className="flex flex-col min-w-0">
+              <span className="truncate text-sm font-semibold text-slate-900">
+                {userName || "Usuário"}
+              </span>
+              <span className="truncate text-xs text-slate-500">
+                {userCpf || "CPF não informado"}
+              </span>
+            </div>
           </div>
-          <div className="flex flex-col min-w-0">
-            <span className="truncate text-sm font-semibold text-slate-900">
-              SSW Gateway
-            </span>
-            <span className="truncate text-xs text-slate-500">
-              Status: Operacional
-            </span>
-          </div>
+          <Link
+            href="/login"
+            title="Alterar usuário / Sair"
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-colors"
+          >
+            <LogOut className="h-4 w-4" />
+          </Link>
         </div>
       </SidebarFooter>
     </Sidebar>

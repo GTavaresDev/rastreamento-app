@@ -27,3 +27,18 @@ export function validateCpf(value: string): CpfValidationResult {
 
   return { valid, cleaned };
 }
+
+export function getValidationMessage(cpf: string, touched: boolean): string {
+  if (!touched) {
+    return "";
+  }
+
+  const digits = onlyDigits(cpf);
+
+  if (digits.length === 0 || digits.length < 11) {
+    return "";
+  }
+
+  return validateCpf(cpf).valid ? "" : "CPF inválido";
+}
+

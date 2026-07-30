@@ -1,5 +1,5 @@
 import type { PackageStatus } from "@/types";
-import { cn } from "@/utils";
+import { cn } from "@/utils/tailwind.util";
 import { STATUS_STYLES } from "@/utils/constants";
 import { getStatusLabel } from "@core/domain/common/utils/formatters/date.formatter";
 

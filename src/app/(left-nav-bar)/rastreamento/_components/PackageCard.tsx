@@ -11,8 +11,8 @@ type PackageCardProps = {
 
 export function PackageCard({ item, scrapedAt, cpf }: PackageCardProps) {
   const detailUrl = cpf
-    ? `/rastreamento/detalhes-da-encomenda/${item.id}?cpf=${encodeURIComponent(cpf)}`
-    : `/rastreamento/detalhes-da-encomenda/${item.id}`;
+    ? `/rastreamento/detalhes/${item.id}?cpf=${encodeURIComponent(cpf)}`
+    : `/rastreamento/detalhes/${item.id}`;
 
   return (
     <Link

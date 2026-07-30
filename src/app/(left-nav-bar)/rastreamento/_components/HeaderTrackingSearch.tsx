@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { Search } from "lucide-react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Input } from "@/components/ui/input";
-import { useTrackingSearch } from "@/components/layout/TrackingSearchContext";
+import { useTrackingSearch } from "../_context/TrackingSearchContext";
 
 function HeaderTrackingSearchContent() {
   const pathname = usePathname();

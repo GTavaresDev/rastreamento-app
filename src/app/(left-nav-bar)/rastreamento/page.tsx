@@ -1,54 +1,71 @@
-import { CpfSearchForm } from "./_components/CpfSearchForm";
-import { TrackingListView } from "./_components/TrackingListView";
+"use client";
+
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { validateCpf } from "@core/domain/common/utils/validators/cpf.validator";
-import { PackageSearch } from "lucide-react";
+import { useRequireCpfAuth } from "@/app/login/_hooks/useRequireCpfAuth";
+import { PackageListLoading } from "./_components/TrackingLoadingStates";
+import { PackageList } from "./_components/TrackingResultsList";
+import { useTrackingData } from "./_hooks/useTrackingData";
 
-type RastreamentoPageProps = {
-  searchParams: Promise<{
-    cpf?: string;
-  }>;
-};
+export default function RastreamentoPage() {
+  const searchParams = useSearchParams();
+  const rawCpf = searchParams.get("cpf") ?? "";
 
-function getSegment(value: string | string[] | undefined) {
-  if (!value) return "";
-  if (Array.isArray(value)) {
-    return value[0]?.trim() ?? "";
+  const { activeCpf, isChecking } = useRequireCpfAuth(rawCpf);
+  const { packages, scrapedAt, loading, error } = useTrackingData(
+    activeCpf ?? ""
+  );
+
+  if (isChecking || (activeCpf && loading)) {
+    return <PackageListLoading />;
   }
-  return value.trim();
-}
 
-export default async function RastreamentoPage({
-  searchParams,
-}: RastreamentoPageProps) {
-  const resolvedSearchParams = await searchParams;
-  const rawCpf = getSegment(resolvedSearchParams.cpf);
+  if (!activeCpf) {
+    return null;
+  }
 
-  const cpfValidation = validateCpf(rawCpf);
+  if (error) {
+    return (
+      <section className="mx-auto flex w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-10">
+        <div className="w-full">
+          <Alert tone="error">{error}</Alert>
+          <div className="mt-4">
+            <Link href="/login">
+              <Button type="button">Tentar outro CPF</Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-  if (cpfValidation.valid) {
-    return <TrackingListView cpf={cpfValidation.cleaned} />;
+  if (packages.length === 0) {
+    return (
+      <section className="mx-auto flex w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-10">
+        <Card className="mx-auto w-full max-w-3xl p-8 text-center sm:p-10">
+          <p className="text-4xl">📦</p>
+          <h1 className="mt-4 text-xl font-semibold text-slate-900">
+            Nenhuma encomenda encontrada para este CPF.
+          </h1>
+          <p className="mt-2 text-slate-500">
+            O SSW não retornou pacotes vinculados ao CPF informado.
+          </p>
+          <div className="mt-6">
+            <Link href="/login">
+              <Button type="button">Alterar CPF</Button>
+            </Link>
+          </div>
+        </Card>
+      </section>
+    );
   }
 
   return (
-    <section className="mx-auto flex w-full max-w-6xl justify-center px-4 pb-16 pt-8 sm:px-6 sm:pt-12">
-      <div className="w-full max-w-lg">
-        <div className="flex flex-col items-center">
-          <Card className="w-full max-w-lg gap-0 rounded-2xl border border-slate-200 bg-white px-7 pb-8 pt-4 shadow-sm sm:px-9 sm:pb-9 sm:pt-5">
-            <div className="mb-7 flex items-center gap-3.5 sm:mb-8">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-slate-900 text-white shadow-sm">
-                <PackageSearch className="h-5 w-5" />
-              </div>
-              <div className="min-w-0">
-                <h1 className="text-lg font-bold tracking-tight text-slate-900 sm:text-xl">
-                  Buscar encomendas por CPF
-                </h1>
-              </div>
-            </div>
-            <CpfSearchForm />
-          </Card>
-        </div>
-      </div>
-    </section>
+    <div className="w-full p-0 m-0">
+      <PackageList items={packages} scrapedAt={scrapedAt} cpf={activeCpf} />
+    </div>
   );
 }

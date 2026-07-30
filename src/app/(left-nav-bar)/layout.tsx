@@ -1,13 +1,17 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/layout/app-sidebar";
+import { AppSidebar } from "@/components/layout/sidebar/app-sidebar";
 import {
   HeaderBackButton,
   HeaderPageTitle,
-} from "@/components/layout/HeaderBackButton";
-import { HeaderTrackingSearch } from "@/components/layout/HeaderTrackingSearch";
-import { TrackingSearchProvider } from "@/components/layout/TrackingSearchContext";
+} from "@/components/layout/header/HeaderBackButton";
+import { HeaderTrackingSearch } from "./rastreamento/_components/HeaderTrackingSearch";
+import { TrackingSearchProvider } from "./rastreamento/_context/TrackingSearchContext";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function LeftNavBarLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -29,9 +33,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </header>
 
           {/* Page Content */}
-          <main className="w-full flex-1 p-0">
-            {children}
-          </main>
+          <main className="w-full flex-1 p-0">{children}</main>
         </div>
       </TrackingSearchProvider>
     </SidebarProvider>

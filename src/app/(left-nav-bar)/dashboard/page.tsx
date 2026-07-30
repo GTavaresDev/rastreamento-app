@@ -1,101 +1,37 @@
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Card } from "@/components/ui/card";
+"use client";
 
-const invoices = [
-  {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV005",
-    paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV006",
-    paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV007",
-    paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    paymentMethod: "Credit Card",
-  },
-];
+import { useDashboardData } from "./_hooks/useDashboardData";
+import { DashboardKpiCards } from "./_components/DashboardKpiCards";
+import { DashboardStatusChart } from "./_components/DashboardStatusChart";
+import { DashboardRecentTable } from "./_components/DashboardRecentTable";
+import { PackageListLoading } from "@/app/(left-nav-bar)/rastreamento/_components/TrackingLoadingStates";
 
 export default function DashboardPage() {
+  const { activeCpf, recentPackages, stats, loading } = useDashboardData();
+
+  if (loading) {
+    return <PackageListLoading />;
+  }
+
   return (
-    <section className="mx-auto w-full max-w-6xl space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-          Dashboard
-        </h1>
-        <p className="text-sm text-slate-500">
-          Visão geral das últimas movimentações e faturas do sistema.
-        </p>
+    <section className="w-full px-4 py-4 sm:px-6 lg:px-8 space-y-5">
+      {/* Top Section: 4 KPI Status Cards on Left (col-span-5), Distribution Chart on Right (col-span-7) */}
+      <div className="grid grid-cols-1 items-stretch gap-5 lg:grid-cols-12">
+        <div className="h-full lg:col-span-5">
+          <DashboardKpiCards stats={stats} />
+        </div>
+        <div className="h-full lg:col-span-7">
+          <DashboardStatusChart stats={stats} />
+        </div>
       </div>
 
-      <Card className="p-6">
-        <Table>
-          <TableCaption>Lista das faturas mais recentes.</TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[100px]">Fatura</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Método</TableHead>
-              <TableHead className="text-right">Valor Total</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {invoices.map((invoice) => (
-              <TableRow key={invoice.invoice}>
-                <TableCell className="font-medium">{invoice.invoice}</TableCell>
-                <TableCell>{invoice.paymentStatus}</TableCell>
-                <TableCell>{invoice.paymentMethod}</TableCell>
-                <TableCell className="text-right">{invoice.totalAmount}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TableCell colSpan={3}>Total</TableCell>
-              <TableCell className="text-right">$2,250.00</TableCell>
-            </TableRow>
-          </TableFooter>
-        </Table>
-      </Card>
+      {/* Bottom Section: Single Full-Width Card in Row */}
+      <div className="w-full">
+        <DashboardRecentTable
+          items={recentPackages}
+          cpf={activeCpf ?? undefined}
+        />
+      </div>
     </section>
   );
 }
