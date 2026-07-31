@@ -63,8 +63,8 @@ export function AppSidebar() {
 
   return (
     <Sidebar>
-      {/* Header with increased top padding and larger logo */}
-      <SidebarHeader className="px-4 pt-7 pb-6">
+      {/* Header with top spacing and larger logo */}
+      <SidebarHeader className="px-4 pt-7 pb-2">
         <Link href="/" className="flex w-full items-center justify-center gap-3">
           <Image
             src="/images/sacflow-icon.svg"
@@ -85,8 +85,8 @@ export function AppSidebar() {
         </Link>
       </SidebarHeader>
 
-      {/* Main menu content with generous top spacing (pt-8) */}
-      <SidebarContent className="px-2.5 pt-8 pb-4">
+      {/* Main menu content closer to the logo (pt-3) */}
+      <SidebarContent className="px-2.5 pt-3 pb-4">
         <SidebarGroup className="p-0">
           <SidebarGroupContent>
             <SidebarMenu className="space-y-1.5">
