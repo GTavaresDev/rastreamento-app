@@ -11,11 +11,11 @@ export default function LoginPage() {
         <div className="flex flex-col items-center text-center space-y-3">
           <div className="flex items-center justify-center gap-3">
             <Image
-              src="/images/hyerlogo.jpg"
+              src="/images/sacflow.png"
               alt={APP_NAME}
               width={48}
               height={48}
-              className="h-12 w-12 rounded-xl object-cover shadow-sm"
+              className="h-12 w-12 rounded-xl object-contain"
               priority
             />
             <span className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">

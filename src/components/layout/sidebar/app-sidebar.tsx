@@ -66,11 +66,11 @@ export function AppSidebar() {
       <SidebarHeader className="p-4 sm:p-5">
         <Link href="/" className="flex w-full items-center justify-center gap-3">
           <Image
-            src="/images/hyerlogo.jpg"
+            src="/images/sacflow.png"
             alt={APP_NAME}
             width={56}
             height={56}
-            className="h-14 w-14 rounded-2xl object-cover"
+            className="h-14 w-14 rounded-xl object-contain"
           />
           <div className="flex flex-col">
             <span className="text-base font-bold tracking-tight text-sidebar-foreground">
