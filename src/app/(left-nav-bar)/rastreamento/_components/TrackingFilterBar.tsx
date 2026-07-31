@@ -31,10 +31,10 @@ export function TrackingFilterBar({
                 type="button"
                 aria-pressed={active}
                 onClick={() => setStatusFilter(filter.value)}
-                className={`shrink-0 cursor-pointer rounded-xl border px-3.5 py-1.5 text-xs font-semibold transition-all ${
+                className={`shrink-0 cursor-pointer rounded-xl border px-3.5 py-1.5 text-xs transition-all ${
                   active
-                    ? "border-slate-400 bg-slate-300 text-slate-950 font-bold shadow-xs"
-                    : "border-slate-200 bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                    ? "border-neutral-400 bg-neutral-300 text-neutral-950 font-bold shadow-xs"
+                    : "border-neutral-200 bg-white text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 font-medium"
                 }`}
               >
                 {filter.label}
