@@ -63,21 +63,21 @@ export function AppSidebar() {
 
   return (
     <Sidebar>
-      <SidebarHeader className="p-4 sm:p-5">
-        <Link href="/" className="flex w-full items-center justify-center gap-3">
+      <SidebarHeader className="p-4">
+        <Link href="/" className="flex w-full items-center gap-2.5">
           <Image
             src="/images/sacflow-icon.svg"
             alt={APP_NAME}
-            width={56}
-            height={56}
-            className="h-14 w-14 rounded-xl object-contain"
+            width={40}
+            height={40}
+            className="h-10 w-10 shrink-0 rounded-lg object-contain"
             unoptimized
           />
-          <div className="flex flex-col">
-            <span className="text-base font-bold tracking-tight text-sidebar-foreground">
+          <div className="flex flex-col min-w-0">
+            <span className="truncate text-sm font-bold tracking-tight text-sidebar-foreground">
               {APP_NAME}
             </span>
-            <span className="text-xs font-medium text-sidebar-foreground/60">
+            <span className="truncate text-[11px] font-medium text-sidebar-foreground/60">
               Painel Logístico
             </span>
           </div>
