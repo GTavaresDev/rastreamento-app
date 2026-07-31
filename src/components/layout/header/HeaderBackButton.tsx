@@ -35,9 +35,9 @@ function HeaderBackButtonContent() {
     );
   }
 
-  // 2. Active screen title (black text, larger font)
+  // 2. Active screen title (black text, balanced font size)
   return (
-    <span className="text-base font-bold text-slate-900 sm:text-lg">
+    <span className="text-sm font-bold text-slate-900 sm:text-base">
       {activeRouteTitle}
     </span>
   );
@@ -47,7 +47,7 @@ export function HeaderBackButton() {
   return (
     <Suspense
       fallback={
-        <span className="text-base font-bold text-slate-900 sm:text-lg">
+        <span className="text-sm font-bold text-slate-900 sm:text-base">
           {APP_NAME}
         </span>
       }
@@ -65,7 +65,7 @@ export function HeaderPageTitle() {
   }
 
   return (
-    <h1 className="truncate text-base font-bold text-slate-900 sm:text-lg">
+    <h1 className="truncate text-sm font-bold text-slate-900 sm:text-base">
       Detalhes da encomenda
     </h1>
   );
