@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { LayoutDashboard, PackageSearch, User, LogOut } from "lucide-react";
+import { LayoutGrid, MapPin, User, LogOut } from "lucide-react";
 
 import {
   Sidebar,
@@ -32,12 +32,12 @@ const items: NavItem[] = [
   {
     title: "Início",
     url: "/dashboard",
-    icon: LayoutDashboard,
+    icon: LayoutGrid,
   },
   {
     title: "Rastreamento",
     url: "/rastreamento",
-    icon: PackageSearch,
+    icon: MapPin,
     matchPrefix: "/rastreamento",
   },
 ];
@@ -99,14 +99,14 @@ export function AppSidebar() {
                       tooltip={item.title}
                       className={
                         active
-                          ? "bg-slate-200 text-slate-900 font-bold hover:bg-slate-200 hover:text-slate-900"
+                          ? "bg-slate-200/90 text-slate-900 font-bold hover:bg-slate-200 hover:text-slate-900"
                           : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
                       }
                       render={<Link href={item.url} />}
                     >
                       <Icon
                         className={`h-5 w-5 shrink-0 transition-colors ${
-                          active ? "text-slate-900" : "text-slate-700"
+                          active ? "text-slate-900" : "text-slate-600"
                         }`}
                       />
                       <span className="text-sm font-semibold">{item.title}</span>
