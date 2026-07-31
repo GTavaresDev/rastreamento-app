@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import type { PackageDetail as PackageDetailType } from "@/types";
 import { getTrackingDetailClient } from "@/services/trackingClient.gateway";
+import { getStoredCpf } from "@core/infra/store/userStore";
 
 export function useTrackingDetail(trackingId: string, cpf?: string) {
   const [item, setItem] = useState<PackageDetailType | null>(null);
@@ -24,7 +25,8 @@ export function useTrackingDetail(trackingId: string, cpf?: string) {
       setError("");
 
       try {
-        const data = await getTrackingDetailClient(trackingId, cpf);
+        const effectiveCpf = cpf || getStoredCpf() || undefined;
+        const data = await getTrackingDetailClient(trackingId, effectiveCpf);
         if (active) {
           setItem(data);
         }

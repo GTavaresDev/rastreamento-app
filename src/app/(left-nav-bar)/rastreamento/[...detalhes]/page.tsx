@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
+import { useRequireCpfAuth } from "@/app/login/_hooks/useRequireCpfAuth";
 import { useTrackingDetail } from "../_hooks/useTrackingDetail";
 import { PackageDetail } from "../_components/PackageDetail";
 import { PackageDetailLoading } from "../_components/TrackingLoadingStates";
@@ -14,11 +15,15 @@ export default function RastreamentoDetalhesPage() {
 
   const detalhesSegments = params.detalhes ?? [];
   const trackingId = detalhesSegments[detalhesSegments.length - 1] ?? "";
-  const cpf = searchParams.get("cpf") ?? "";
+  const queryCpf = searchParams.get("cpf") ?? "";
 
-  const { item, loading, error } = useTrackingDetail(trackingId, cpf);
+  const { activeCpf, isChecking } = useRequireCpfAuth(queryCpf);
+  const { item, loading, error } = useTrackingDetail(
+    trackingId,
+    activeCpf ?? undefined
+  );
 
-  if (loading) {
+  if (isChecking || loading) {
     return <PackageDetailLoading />;
   }
 
