@@ -195,10 +195,10 @@
   margin: 0 auto;
   padding: 1.75rem 1.5rem;
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem 1.25rem;
+  gap: 1.25rem;
   align-items: center;
   border-bottom: 1px dashed var(--linha);
+  overflow: hidden;
 }
 
 .indice-titulo {
@@ -208,15 +208,30 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--verde-editorial);
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.indice-janela {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
+}
+
+.indice-faixa {
+  display: flex;
+  width: max-content;
+  animation: carrossel-generos 60s linear infinite;
 }
 
 .indice-lista {
   list-style: none;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 0.75rem;
+  flex-wrap: nowrap;
+  gap: 0.75rem;
   margin: 0;
-  padding: 0;
+  padding: 0 0.75rem 0 0;
 }
 
 .indice-item {
@@ -229,6 +244,7 @@
   color: var(--tinta-suave);
   transition: all 0.2s ease;
   cursor: default;
+  white-space: nowrap;
 }
 
 .indice-item:hover {
@@ -236,6 +252,17 @@
   color: var(--papel);
   border-color: var(--verde-editorial);
   transform: translateY(-1px);
+}
+
+.indice:hover .indice-faixa,
+.indice:focus-within .indice-faixa {
+  animation-play-state: paused;
+}
+
+@keyframes carrossel-generos {
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* Seção de Catálogo */
@@ -273,6 +300,65 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2.5rem;
+}
+
+/* Paginação do catálogo */
+.paginacao-status {
+  margin: -1.25rem 0 1.5rem;
+  color: var(--tinta-suave);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.78rem;
+}
+
+.paginacao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.paginacao-paginas {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.paginacao-botao {
+  min-width: 2.6rem;
+  height: 2.6rem;
+  padding: 0 0.75rem;
+  border: 1px solid var(--linha);
+  border-radius: 999px;
+  background: var(--papel-card);
+  color: var(--verde-editorial);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.paginacao-botao:hover:not(:disabled),
+.paginacao-botao[aria-current="page"] {
+  background: var(--verde-editorial);
+  border-color: var(--verde-editorial);
+  color: var(--papel);
+  transform: translateY(-1px);
+}
+
+.paginacao-botao:focus-visible {
+  outline: 3px solid var(--ouro-claro);
+  outline-offset: 3px;
+}
+
+.paginacao-botao:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.paginacao-botao-texto {
+  min-width: 7.5rem;
 }
 
 /* Card Ficha */
@@ -506,11 +592,30 @@
   .grade {
     grid-template-columns: 1fr;
   }
+  .paginacao {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .paginacao-paginas {
+    order: -1;
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   * {
     scroll-behavior: auto !important;
     transition: none !important;
+  }
+  .indice-janela {
+    overflow-x: auto;
+    mask-image: none;
+  }
+  .indice-faixa {
+    animation: none;
+  }
+  .indice-lista[aria-hidden="true"] {
+    display: none;
   }
 }

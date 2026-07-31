@@ -1,9 +1,8 @@
 import { Fraunces, Source_Serif_4, IBM_Plex_Mono } from "next/font/google";
 import "./readme.css";
-import { livros } from "./_mocks/livros";
 import { Cabecalho } from "./_components/Cabecalho";
 import { IndiceGeneros } from "./_components/IndiceGeneros";
-import { FichaLivro } from "./_components/FichaLivro";
+import { CatalogoPaginado } from "./_components/CatalogoPaginado";
 import { NotaFinal } from "./_components/NotaFinal";
 import { Rodape } from "./_components/Rodape";
 
@@ -48,11 +47,7 @@ export default function CatalogoBiblioteca() {
                     </p>
                 </div>
 
-                <ol className="grade" data-total-livros={livros.length}>
-                    {livros.map((livro) => (
-                        <FichaLivro key={livro.id} livro={livro} />
-                    ))}
-                </ol>
+                <CatalogoPaginado />
             </main>
 
             <NotaFinal />
