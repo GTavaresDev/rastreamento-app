@@ -19,9 +19,9 @@ export function LoginForm() {
   } = useLoginForm();
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form onSubmit={handleSubmit} className="space-y-4">
       {/* Nome Input */}
-      <div className="space-y-2">
+      <div className="space-y-1.5">
         <label htmlFor="name" className="text-sm font-semibold text-slate-700">
           Seu nome
         </label>
@@ -33,7 +33,7 @@ export function LoginForm() {
           placeholder="Digite seu nome completo"
           value={name}
           hasError={Boolean(nameValidationMessage)}
-          className="h-14 rounded-xl border-slate-200 bg-white px-5 text-base shadow-sm placeholder:text-slate-400 sm:h-16"
+          className="h-[55px] rounded-xl border-slate-200 bg-white px-4 text-base shadow-sm placeholder:text-slate-400"
           onChange={(event) => handleNameChange(event.target.value)}
           onBlur={handleNameBlur}
           aria-invalid={Boolean(nameValidationMessage)}
@@ -46,7 +46,7 @@ export function LoginForm() {
       </div>
 
       {/* CPF Input */}
-      <div className="space-y-2">
+      <div className="space-y-1.5">
         <label htmlFor="cpf" className="text-sm font-semibold text-slate-700">
           CPF do destinatário
         </label>
@@ -60,7 +60,7 @@ export function LoginForm() {
           placeholder="Digite seu CPF (ex: 000.000.000-00)"
           value={cpf}
           hasError={Boolean(cpfValidationMessage)}
-          className="h-14 rounded-xl border-slate-200 bg-white px-5 text-base shadow-sm placeholder:text-slate-400 sm:h-16"
+          className="h-[55px] rounded-xl border-slate-200 bg-white px-4 text-base shadow-sm placeholder:text-slate-400"
           onChange={(event) => handleCpfChange(event.target.value)}
           onBlur={handleCpfBlur}
           maxLength={14}
@@ -77,7 +77,7 @@ export function LoginForm() {
       {error ? <p className="text-sm font-semibold text-red-600">{error}</p> : null}
 
       <Button
-        className="h-14 w-full rounded-xl bg-slate-900 text-base font-bold text-white shadow-sm hover:bg-slate-800 focus-visible:ring-slate-500 sm:h-16"
+        className="h-[55px] w-full rounded-xl bg-slate-900 text-base font-bold text-white shadow-sm hover:bg-slate-800 focus-visible:ring-slate-500"
         type="submit"
       >
         Entrar e buscar encomendas

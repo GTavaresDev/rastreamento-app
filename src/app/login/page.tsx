@@ -6,7 +6,7 @@ import { APP_NAME } from "@/utils/constants";
 export default function LoginPage() {
   return (
     <main className="flex min-h-screen w-full items-center justify-center bg-slate-50 px-4 py-12 sm:px-6 lg:px-8">
-      <div className="w-full max-w-md space-y-8">
+      <div className="w-full max-w-md space-y-6">
         {/* Branding & Logo: Icon and Name side-by-side */}
         <div className="flex justify-center">
           <div className="flex items-center justify-center gap-3">
@@ -26,7 +26,7 @@ export default function LoginPage() {
         </div>
 
         {/* Login Form Card */}
-        <Card className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm sm:p-9">
+        <Card className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-7">
           <LoginForm />
         </Card>
       </div>
