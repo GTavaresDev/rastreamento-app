@@ -64,7 +64,7 @@ export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarHeader className="p-4">
-        <Link href="/" className="flex w-full items-center gap-2.5">
+        <Link href="/" className="flex w-full items-center justify-center gap-2.5">
           <Image
             src="/images/sacflow-icon.svg"
             alt={APP_NAME}
