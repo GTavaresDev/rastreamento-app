@@ -18,7 +18,7 @@ export default function LeftNavBarLayout({
       <TrackingSearchProvider>
         <div className="flex flex-1 flex-col min-w-0 bg-slate-100/70">
           {/* Fixed Top Header */}
-          <header className="sticky top-0 z-30 grid h-16 w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center border-b border-slate-200 bg-white/95 px-4 backdrop-blur-sm sm:px-6 lg:px-8">
+          <header className="sticky top-0 z-30 grid h-14 w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center border-b border-slate-200 bg-white/95 px-4 backdrop-blur-sm sm:px-6 lg:px-8">
             <div className="flex min-w-0 items-center gap-3 justify-self-start">
               <SidebarTrigger className="md:hidden" />
               <HeaderBackButton />
