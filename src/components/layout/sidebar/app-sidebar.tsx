@@ -63,14 +63,14 @@ export function AppSidebar() {
 
   return (
     <Sidebar>
-      <SidebarHeader className="p-4">
+      <SidebarHeader className="p-4 pb-2">
         <Link href="/" className="flex w-full items-center justify-center gap-2.5">
           <Image
             src="/images/sacflow-icon.svg"
             alt={APP_NAME}
-            width={40}
-            height={40}
-            className="h-10 w-10 shrink-0 rounded-lg object-contain"
+            width={38}
+            height={38}
+            className="h-9 w-9 shrink-0 rounded-lg object-contain"
             unoptimized
           />
           <div className="flex flex-col min-w-0">
@@ -84,10 +84,10 @@ export function AppSidebar() {
         </Link>
       </SidebarHeader>
 
-      <SidebarContent className="px-3 py-4">
-        <SidebarGroup>
+      <SidebarContent className="px-2.5 py-3">
+        <SidebarGroup className="p-0">
           <SidebarGroupContent>
-            <SidebarMenu className="space-y-1.5">
+            <SidebarMenu className="space-y-1">
               {items.map((item) => {
                 const active = isItemActive(item);
                 const Icon = item.icon;
@@ -96,20 +96,21 @@ export function AppSidebar() {
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton
                       isActive={active}
+                      size="sm"
                       tooltip={item.title}
                       className={
                         active
-                          ? "bg-slate-200/90 text-slate-900 font-bold hover:bg-slate-200 hover:text-slate-900"
-                          : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                          ? "h-9 rounded-xl bg-slate-200/90 text-slate-900 font-semibold hover:bg-slate-200 hover:text-slate-900"
+                          : "h-9 rounded-xl text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900"
                       }
                       render={<Link href={item.url} />}
                     >
                       <Icon
-                        className={`h-5 w-5 shrink-0 transition-colors ${
+                        className={`h-4.5 w-4.5 shrink-0 transition-colors ${
                           active ? "text-slate-900" : "text-slate-600"
                         }`}
                       />
-                      <span className="text-sm font-semibold">{item.title}</span>
+                      <span className="text-sm font-medium tracking-tight">{item.title}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 );
