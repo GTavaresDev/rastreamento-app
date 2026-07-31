@@ -33,7 +33,7 @@ export function TrackingFilterBar({
                 onClick={() => setStatusFilter(filter.value)}
                 className={`shrink-0 cursor-pointer rounded-xl border px-3.5 py-1.5 text-xs font-semibold transition-all ${
                   active
-                    ? "border-slate-400 bg-slate-200/90 text-slate-950 font-bold shadow-xs"
+                    ? "border-slate-400 bg-slate-300 text-slate-950 font-bold shadow-xs"
                     : "border-slate-200 bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                 }`}
               >

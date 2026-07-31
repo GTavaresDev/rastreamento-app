@@ -102,14 +102,14 @@ export function AppSidebar() {
                       tooltip={item.title}
                       className={
                         active
-                          ? "h-9 rounded-xl bg-neutral-200 text-neutral-900 font-semibold hover:bg-neutral-200 hover:text-neutral-900 focus-visible:ring-2 focus-visible:ring-neutral-400"
-                          : "h-9 rounded-xl text-neutral-700 font-medium hover:bg-neutral-200/60 hover:text-neutral-900 focus-visible:ring-2 focus-visible:ring-neutral-400"
+                          ? "h-9 rounded-xl bg-slate-300 text-slate-950 font-bold hover:bg-slate-300 hover:text-slate-950 focus-visible:ring-2 focus-visible:ring-slate-400"
+                          : "h-9 rounded-xl text-slate-700 font-medium hover:bg-slate-200/70 hover:text-slate-950 focus-visible:ring-2 focus-visible:ring-slate-400"
                       }
                       render={<Link href={item.url} />}
                     >
                       <Icon
                         className={`h-4.5 w-4.5 shrink-0 transition-colors ${
-                          active ? "text-neutral-900" : "text-neutral-600"
+                          active ? "text-slate-950" : "text-slate-600"
                         }`}
                       />
                       <span className="text-sm font-medium tracking-tight">{item.title}</span>
@@ -123,16 +123,16 @@ export function AppSidebar() {
       </SidebarContent>
 
       <SidebarFooter className="border-t border-sidebar-border p-3">
-        <div className="flex items-center justify-between gap-2 rounded-xl bg-neutral-200/50 p-2.5">
+        <div className="flex items-center justify-between gap-2 rounded-xl bg-slate-200/60 p-2.5">
           <div className="flex items-center gap-2 min-w-0">
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-neutral-900 text-white font-bold text-xs">
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-900 text-white font-bold text-xs">
               {userName ? userName.charAt(0).toUpperCase() : <User className="h-3.5 w-3.5" />}
             </div>
             <div className="flex flex-col min-w-0">
-              <span className="truncate text-xs font-semibold text-neutral-900">
+              <span className="truncate text-xs font-semibold text-slate-900">
                 {userName || "Usuário"}
               </span>
-              <span className="truncate text-[11px] text-neutral-500">
+              <span className="truncate text-[11px] text-slate-500">
                 {userCpf || "CPF não informado"}
               </span>
             </div>
@@ -140,7 +140,7 @@ export function AppSidebar() {
           <Link
             href="/login"
             title="Alterar usuário / Sair"
-            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-neutral-500 hover:bg-neutral-200 hover:text-neutral-900 transition-colors"
+            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-300 hover:text-slate-900 transition-colors"
           >
             <LogOut className="h-3.5 w-3.5" />
           </Link>
