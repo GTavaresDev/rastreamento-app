@@ -8,7 +8,7 @@ export default function LoginPage() {
     <main className="flex min-h-screen w-full items-center justify-center bg-slate-50 px-4 py-12 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
         {/* Branding & Logo: Icon and Name side-by-side */}
-        <div className="flex flex-col items-center text-center space-y-3">
+        <div className="flex justify-center">
           <div className="flex items-center justify-center gap-3">
             <Image
               src="/images/sacflow-icon.svg"
@@ -23,9 +23,6 @@ export default function LoginPage() {
               {APP_NAME}
             </span>
           </div>
-          <p className="text-sm text-slate-500">
-            Acesse suas encomendas informando o CPF cadastrado
-          </p>
         </div>
 
         {/* Login Form Card */}
