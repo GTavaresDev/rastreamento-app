@@ -183,7 +183,7 @@ export function PackageList({ items, scrapedAt, cpf }: PackageListProps) {
                 {headerGroup.headers.map((header, index) => (
                   <TableHead
                     key={header.id}
-                    className={`h-12 whitespace-nowrap text-left text-sm font-semibold text-slate-500 ${
+                    className={`h-10 whitespace-nowrap text-left text-sm font-semibold text-slate-500 ${
                       index === 0
                         ? "pl-5 pr-4"
                         : index === headerGroup.headers.length - 1

@@ -50,22 +50,22 @@ export function PackageListLoading() {
         <Table className="min-w-[980px]">
           <TableHeader className="bg-slate-50">
             <TableRow className="border-b border-slate-200 hover:bg-slate-50">
-              <TableHead className="h-12 pl-5 pr-4">
+              <TableHead className="h-10 pl-5 pr-4">
                 <Skeleton className="h-4 w-20" />
               </TableHead>
-              <TableHead className="h-12 px-4">
+              <TableHead className="h-10 px-4">
                 <Skeleton className="h-4 w-16" />
               </TableHead>
-              <TableHead className="h-12 px-4">
+              <TableHead className="h-10 px-4">
                 <Skeleton className="h-4 w-20" />
               </TableHead>
-              <TableHead className="h-12 px-4">
+              <TableHead className="h-10 px-4">
                 <Skeleton className="h-4 w-28" />
               </TableHead>
-              <TableHead className="h-12 px-4">
+              <TableHead className="h-10 px-4">
                 <Skeleton className="h-4 w-36" />
               </TableHead>
-              <TableHead className="h-12 pl-4 pr-5">
+              <TableHead className="h-10 pl-4 pr-5">
                 <Skeleton className="h-4 w-16" />
               </TableHead>
             </TableRow>
