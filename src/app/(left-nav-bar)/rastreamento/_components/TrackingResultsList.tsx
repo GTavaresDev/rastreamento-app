@@ -86,28 +86,15 @@ export function PackageList({ items, scrapedAt, cpf }: PackageListProps) {
         accessorKey: "lastEvent",
         header: "Última atualização",
         cell: ({ row }) => {
-          const description = row.original.lastEvent.description;
           const relativeDate = formatRelativeDate(
             row.original.lastEvent.dateTime,
             scrapedAt
           );
 
           return (
-            <div className="w-[240px] min-w-0 space-y-1">
-              <Tooltip>
-                <TooltipTrigger className="w-full cursor-pointer text-left">
-                  <span className="block truncate text-sm font-medium text-slate-800">
-                    {description}
-                  </span>
-                </TooltipTrigger>
-                <TooltipContent side="top" className="max-w-xs text-xs">
-                  {description}
-                </TooltipContent>
-              </Tooltip>
-              <p className="text-xs font-medium text-slate-400">
-                {relativeDate}
-              </p>
-            </div>
+            <span className="whitespace-nowrap text-sm font-medium text-slate-700">
+              {relativeDate}
+            </span>
           );
         },
       },
