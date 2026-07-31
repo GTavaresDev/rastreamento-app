@@ -63,14 +63,15 @@ export function AppSidebar() {
 
   return (
     <Sidebar>
-      <SidebarHeader className="p-4 pb-4">
+      {/* Header with increased top padding and larger logo */}
+      <SidebarHeader className="px-4 pt-7 pb-6">
         <Link href="/" className="flex w-full items-center justify-center gap-3">
           <Image
             src="/images/sacflow-icon.svg"
             alt={APP_NAME}
-            width={48}
-            height={48}
-            className="h-11 w-11 shrink-0 rounded-xl object-contain"
+            width={56}
+            height={56}
+            className="h-14 w-14 shrink-0 rounded-xl object-contain"
             unoptimized
           />
           <div className="flex flex-col min-w-0">
@@ -84,10 +85,11 @@ export function AppSidebar() {
         </Link>
       </SidebarHeader>
 
-      <SidebarContent className="px-2.5 pt-6 pb-4">
+      {/* Main menu content with generous top spacing (pt-8) */}
+      <SidebarContent className="px-2.5 pt-8 pb-4">
         <SidebarGroup className="p-0">
           <SidebarGroupContent>
-            <SidebarMenu className="space-y-1">
+            <SidebarMenu className="space-y-1.5">
               {items.map((item) => {
                 const active = isItemActive(item);
                 const Icon = item.icon;
