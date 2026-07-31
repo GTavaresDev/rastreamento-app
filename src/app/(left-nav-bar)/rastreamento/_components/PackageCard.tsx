@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MoreVertical } from "lucide-react";
 import type { PackageSummary } from "@/types";
 import { formatRelativeDate } from "@core/domain/common/utils/formatters/date.formatter";
 import { StatusBadge } from "@/app/(left-nav-bar)/rastreamento/_components/StatusBadge";
@@ -6,21 +7,18 @@ import { StatusBadge } from "@/app/(left-nav-bar)/rastreamento/_components/Statu
 type PackageCardProps = {
   item: PackageSummary;
   scrapedAt?: string;
-  cpf?: string;
 };
 
-export function PackageCard({ item, scrapedAt, cpf }: PackageCardProps) {
-  const detailUrl = cpf
-    ? `/rastreamento/detalhes/${item.id}?cpf=${encodeURIComponent(cpf)}`
-    : `/rastreamento/detalhes/${item.id}`;
+export function PackageCard({ item, scrapedAt }: PackageCardProps) {
+  const detailUrl = `/rastreamento/detalhes/${item.id}`;
 
   return (
     <Link
       href={detailUrl}
-      className="group block rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md focus-visible:ring-2 focus-visible:ring-slate-300 focus-visible:ring-offset-2 sm:p-5"
+      className="group block rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md focus-visible:ring-2 focus-visible:ring-slate-300 focus-visible:ring-offset-2 sm:p-5"
     >
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-        <div className="min-w-0 space-y-2">
+      <div className="flex items-center justify-between gap-4">
+        <div className="min-w-0 space-y-1">
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">
             Nota fiscal
           </p>
@@ -28,8 +26,11 @@ export function PackageCard({ item, scrapedAt, cpf }: PackageCardProps) {
             {item.nfNumber}
           </p>
         </div>
-        <div className="sm:pt-0.5">
+        <div className="flex items-center gap-3">
           <StatusBadge status={item.currentStatus} />
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 transition-colors group-hover:bg-slate-100 group-hover:text-slate-900">
+            <MoreVertical className="h-4 w-4" />
+          </div>
         </div>
       </div>
 
@@ -37,7 +38,7 @@ export function PackageCard({ item, scrapedAt, cpf }: PackageCardProps) {
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
           Destinatário
         </p>
-        <p className="mt-2 text-base font-semibold leading-6 text-slate-900">
+        <p className="mt-1.5 text-base font-semibold leading-6 text-slate-900">
           {item.recipient}
         </p>
       </div>
@@ -54,12 +55,6 @@ export function PackageCard({ item, scrapedAt, cpf }: PackageCardProps) {
             {formatRelativeDate(item.lastEvent.dateTime, scrapedAt)}
           </span>
         </div>
-      </div>
-
-      <div className="mt-4 flex justify-end">
-        <span className="inline-flex whitespace-nowrap items-center justify-center rounded-lg bg-slate-700 px-2.5 py-1.5 text-xs font-medium text-white transition-colors group-hover:bg-slate-800">
-          Ver detalhes
-        </span>
       </div>
     </Link>
   );

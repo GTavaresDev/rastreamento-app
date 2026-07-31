@@ -91,8 +91,8 @@ export function PackageListLoading() {
                     <Skeleton className="h-3 w-28" />
                   </div>
                 </TableCell>
-                <TableCell className="pl-4 pr-5">
-                  <Skeleton className="h-8 w-24 rounded-lg" />
+                <TableCell className="pl-4 pr-5 text-right">
+                  <Skeleton className="ml-auto h-8 w-8 rounded-lg" />
                 </TableCell>
               </TableRow>
             ))}

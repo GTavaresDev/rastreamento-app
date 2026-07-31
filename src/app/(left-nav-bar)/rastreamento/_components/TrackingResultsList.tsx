@@ -12,6 +12,7 @@ import { PackageCard } from "./PackageCard";
 import { StatusBadge } from "./StatusBadge";
 import { formatRelativeDate } from "@core/domain/common/utils/formatters/date.formatter";
 import { Button } from "@/components/ui/button";
+import { MoreVertical } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -112,19 +113,23 @@ export function PackageList({ items, scrapedAt, cpf }: PackageListProps) {
       },
       {
         id: "actions",
-        header: "Ações",
+        header: "",
         cell: ({ row }) => (
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-8 text-xs font-semibold text-blue-700 hover:bg-blue-50 hover:text-blue-800"
-            onClick={(event) => {
-              event.stopPropagation();
-              router.push(getDetailUrl(row.original.id));
-            }}
-          >
-            Ver detalhes
-          </Button>
+          <div className="flex justify-end">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8 rounded-lg text-slate-500 hover:bg-slate-100 hover:text-slate-900"
+              title="Ver detalhes"
+              onClick={(event) => {
+                event.stopPropagation();
+                router.push(getDetailUrl(row.original.id));
+              }}
+            >
+              <MoreVertical className="h-4 w-4" />
+              <span className="sr-only">Ver detalhes</span>
+            </Button>
+          </div>
         ),
       },
     ],
@@ -157,7 +162,6 @@ export function PackageList({ items, scrapedAt, cpf }: PackageListProps) {
               key={item.id}
               item={item}
               scrapedAt={scrapedAt}
-              cpf={cpf}
             />
           ))
         ) : (
