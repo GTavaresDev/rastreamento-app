@@ -42,7 +42,7 @@ export function PackageDetail({ item }: PackageDetailProps) {
             <p className="text-[11px] font-normal uppercase tracking-[0.18em] text-slate-600">
               Nota fiscal
             </p>
-            <p className="mt-1.5 break-words text-base font-bold leading-6 text-slate-900">
+            <p className="mt-1.5 whitespace-nowrap truncate text-base font-bold leading-6 text-slate-900">
               {item.nfNumber}
             </p>
           </div>
@@ -51,7 +51,10 @@ export function PackageDetail({ item }: PackageDetailProps) {
             <p className="text-[11px] font-normal uppercase tracking-[0.18em] text-slate-600">
               Remetente
             </p>
-            <p className="mt-1.5 break-words text-base font-bold leading-6 text-slate-900">
+            <p
+              className="mt-1.5 whitespace-nowrap truncate text-base font-bold leading-6 text-slate-900"
+              title={item.recipient}
+            >
               {item.recipient}
             </p>
           </div>

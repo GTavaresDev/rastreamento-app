@@ -106,7 +106,7 @@ export function PackageListLoading() {
 export function PackageDetailLoading() {
   return (
     <section className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6">
-      <div className="mx-auto max-w-md">
+      <div className="mx-auto max-w-lg">
         <div className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
           <div className="flex items-start justify-between gap-4">
             <div className="space-y-2">
