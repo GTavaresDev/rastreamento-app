@@ -75,7 +75,7 @@ export function useLoginForm() {
     setError("");
     setStoredUserName(name);
     setStoredCpf(validation.cleaned);
-    router.push("/rastreamento");
+    router.push("/dashboard");
   }
 
   return {
