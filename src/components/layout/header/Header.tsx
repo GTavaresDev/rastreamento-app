@@ -10,7 +10,7 @@ export function Header() {
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
         <Link href="/" className="flex items-center gap-3 text-slate-900">
           <Image
-            src="/images/sacflow.png"
+            src="/images/sacflow-icon.svg"
             alt={`${APP_NAME} logo`}
             width={40}
             height={40}

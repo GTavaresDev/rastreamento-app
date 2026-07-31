@@ -11,7 +11,7 @@ export default function LoginPage() {
         <div className="flex flex-col items-center text-center space-y-3">
           <div className="flex items-center justify-center gap-3">
             <Image
-              src="/images/sacflow.png"
+              src="/images/sacflow-icon.svg"
               alt={APP_NAME}
               width={48}
               height={48}
