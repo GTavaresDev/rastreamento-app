@@ -18,8 +18,8 @@ O projeto adota uma organização por camadas com foco em separação de respons
 - `features/`  
   Camada de domínio da interface. No projeto atual, `features/tracking` concentra os componentes e o provider responsáveis pelo fluxo de rastreamento.
 
-- `services/`  
-  Camada de orquestração. O service centraliza o pipeline de negócio e tira essa responsabilidade da rota HTTP.
+- `core/`  
+  Camada de orquestração e casos de uso de domínio (Clean Architecture). O service centraliza o pipeline de negócio fora de `src/` e tira essa responsabilidade da rota HTTP.
 
 - `utils/`  
   Utilitários especializados, incluindo validator, scraper, parser, formatters e constantes.
@@ -33,7 +33,7 @@ O projeto adota uma organização por camadas com foco em separação de respons
 ### Fluxo principal
 
 ```text
-input -> validator -> scraper -> parser -> service -> API response
+input -> validator -> scraper -> parser -> service (core) -> API response
 ```
 
 Na prática:
@@ -42,12 +42,14 @@ Na prática:
 2. O validator valida e normaliza o valor.
 3. O scraper consulta o portal público do SSW e obtém o HTML.
 4. O parser converte o HTML em estruturas tipadas.
-5. O service orquestra o pipeline e monta a resposta final.
+5. O service (`core/services`) orquestra o pipeline e monta a resposta final.
 6. A API route apenas adapta o resultado para HTTP/JSON.
 
 ## Estrutura de pastas
 
 ```text
+core/
+└── services/
 src/
 ├── app/
 ├── components/
@@ -57,7 +59,6 @@ src/
 ├── config/
 ├── features/
 │   └── tracking/
-├── services/
 ├── types/
 └── utils/
     ├── formatters/

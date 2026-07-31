@@ -10,6 +10,8 @@ export type TrackingEvent = {
   dateTime: string;
   location: string;
   unit: string;
+  title?: string;
+  detail?: string;
   description: string;
   status: PackageStatus;
 };
@@ -21,7 +23,7 @@ export type PackageSummary = {
   orderNumber: string;
   currentStatus: PackageStatus;
   lastEvent: TrackingEvent;
-  eventCount: number;
+  eventCount?: number;
 };
 
 export type PackageDetail = {
@@ -51,6 +53,7 @@ export type TrackingListItem = {
 export type TrackingCache = {
   cpf: string;
   payload: TrackingPayload;
+  details?: Record<string, PackageDetail>;
   scrapedAt: string;
   userName: string | null;
 };

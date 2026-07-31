@@ -1,0 +1,702 @@
+[
+  {
+    "id": "pkg-1001",
+    "nfNumber": "001.482.910",
+    "orderNumber": "PED-98210",
+    "recipient": "Gabriel Tavares",
+    "currentStatus": "entregue",
+    "lastEvent": {
+      "dateTime": "2026-07-30T14:20:00.000Z",
+      "status": "entregue",
+      "description": "Encomenda entregue ao destinatário final",
+      "location": "São Paulo - SP",
+      "unit": "Unidade SSW SP"
+    }
+  },
+  {
+    "id": "pkg-1002",
+    "nfNumber": "001.482.911",
+    "orderNumber": "PED-98211",
+    "recipient": "Camila Oliveira",
+    "currentStatus": "em_transito",
+    "lastEvent": {
+      "dateTime": "2026-07-30T09:15:00.000Z",
+      "status": "em_transito",
+      "description": "Em trânsito para a unidade de distribuição regional",
+      "location": "Campinas - SP",
+      "unit": "Unidade SSW Campinas"
+    }
+  },
+  {
+    "id": "pkg-1003",
+    "nfNumber": "001.482.912",
+    "orderNumber": "PED-98212",
+    "recipient": "Lucas Mendes",
+    "currentStatus": "em_transferencia",
+    "lastEvent": {
+      "dateTime": "2026-07-29T18:45:00.000Z",
+      "status": "em_transferencia",
+      "description": "Mercadoria em transferência entre filiais SSW",
+      "location": "Curitiba - PR",
+      "unit": "Unidade SSW Curitiba"
+    }
+  },
+  {
+    "id": "pkg-1004",
+    "nfNumber": "001.482.913",
+    "orderNumber": "PED-98213",
+    "recipient": "Ana Beatriz Souza",
+    "currentStatus": "pendente",
+    "lastEvent": {
+      "dateTime": "2026-07-29T11:30:00.000Z",
+      "status": "pendente",
+      "description": "Pedido recebido pela transportadora, aguardando triagem",
+      "location": "Guarulhos - SP",
+      "unit": "Unidade SSW GRU"
+    }
+  },
+  {
+    "id": "pkg-1005",
+    "nfNumber": "001.482.914",
+    "orderNumber": "PED-98214",
+    "recipient": "Felipe Alcântara",
+    "currentStatus": "entregue",
+    "lastEvent": {
+      "dateTime": "2026-07-28T16:10:00.000Z",
+      "status": "entregue",
+      "description": "Entregue na portaria com comprovante assinado",
+      "location": "São Paulo - SP",
+      "unit": "Unidade SSW SP"
+    }
+  },
+  {
+    "id": "pkg-1006",
+    "nfNumber": "001.482.915",
+    "orderNumber": "PED-98215",
+    "recipient": "Juliana Lima",
+    "currentStatus": "entregue",
+    "lastEvent": {
+      "dateTime": "2026-07-27T10:05:00.000Z",
+      "status": "entregue",
+      "description": "Encomenda entregue com sucesso",
+      "location": "São Paulo - SP",
+      "unit": "Unidade SSW SP"
+    }
+  },
+  {
+    "id": "pkg-1007",
+    "nfNumber": "001.482.916",
+    "orderNumber": "PED-98216",
+    "recipient": "Ricardo Barbosa",
+    "currentStatus": "em_transito",
+    "lastEvent": {
+      "dateTime": "2026-07-27T08:30:00.000Z",
+      "status": "em_transito",
+      "description": "Saída para entrega ao destinatário",
+      "location": "Rio de Janeiro - RJ",
+      "unit": "Unidade SSW RJ"
+    }
+  },
+  {
+    "id": "pkg-1008",
+    "nfNumber": "001.482.917",
+    "orderNumber": "PED-98217",
+    "recipient": "Mariana Costa",
+    "currentStatus": "pendente",
+    "lastEvent": {
+      "dateTime": "2026-07-26T15:00:00.000Z",
+      "status": "pendente",
+      "description": "Aguardando autorização de despacho do remetente",
+      "location": "Belo Horizonte - MG",
+      "unit": "Unidade SSW BH"
+    }
+  },
+  {
+    "id": "pkg-1009",
+    "nfNumber": "001.482.918",
+    "orderNumber": "PED-98218",
+    "recipient": "Rodrigo Rocha",
+    "currentStatus": "entregue",
+    "lastEvent": {
+      "dateTime": "2026-07-25T17:40:00.000Z",
+      "status": "entregue",
+      "description": "Recebido por Maria Santos",
+      "location": "São Paulo - SP",
+      "unit": "Unidade SSW SP"
+    }
+  },
+  {
+    "id": "pkg-1010",
+    "nfNumber": "001.482.919",
+    "orderNumber": "PED-98219",
+    "recipient": "Beatriz Ribeiro",
+    "currentStatus": "em_transferencia",
+    "lastEvent": {
+      "dateTime": "2026-07-25T12:10:00.000Z",
+      "status": "em_transferencia",
+      "description": "Carga embarcada no hub principal",
+      "location": "Campinas - SP",
+      "unit": "Hub Logístico VCP"
+    }
+  },
+  {
+    "id": "pkg-1011",
+    "nfNumber": "001.482.920",
+    "orderNumber": "PED-98220",
+    "recipient": "Carlos Eduardo",
+    "currentStatus": "entregue",
+    "lastEvent": {
+      "dateTime": "2026-07-24T11:25:00.000Z",
+      "status": "entregue",
+      "description": "Entregue no endereço cadastrado",
+      "location": "Porto Alegre - RS",
+      "unit": "Unidade SSW POA"
+    }
+  },
+  {
+    "id": "pkg-1012",
+    "nfNumber": "001.482.921",
+    "orderNumber": "PED-98221",
+    "recipient": "Vanessa Martins",
+    "currentStatus": "em_transito",
+    "lastEvent": {
+      "dateTime": "2026-07-24T07:50:00.000Z",
+      "status": "em_transito",
+      "description": "Veículo em deslocamento entre cidades",
+      "location": "Joinville - SC",
+      "unit": "Unidade SSW JOI"
+    }
+  },
+  {
+    "id": "pkg-1013",
+    "nfNumber": "001.482.922",
+    "orderNumber": "PED-98222",
+    "recipient": "Gustavo Henrique",
+    "currentStatus": "devolvido",
+    "lastEvent": {
+      "dateTime": "2026-07-23T16:00:00.000Z",
+      "status": "devolvido",
+      "description": "Destinatário ausente após 3 tentativas de entrega",
+      "location": "Florianópolis - SC",
+      "unit": "Unidade SSW FLN"
+    }
+  },
+  {
+    "id": "pkg-1014",
+    "nfNumber": "001.482.923",
+    "orderNumber": "PED-98223",
+    "recipient": "Larissa Fonseca",
+    "currentStatus": "entregue",
+    "lastEvent": {
+      "dateTime": "2026-07-23T14:15:00.000Z",
+      "status": "entregue",
+      "description": "Entrega confirmada no destino",
+      "location": "Salvador - BA",
+      "unit": "Unidade SSW SSA"
+    }
+  },
+  {
+    "id": "pkg-1015",
+    "nfNumber": "001.482.924",
+    "orderNumber": "PED-98224",
+    "recipient": "Thiago Silva",
+    "currentStatus": "pendente",
+    "lastEvent": {
+      "dateTime": "2026-07-22T09:40:00.000Z",
+      "status": "pendente",
+      "description": "Aguardando entrada em estoque para roteirização",
+      "location": "Recife - PE",
+      "unit": "Unidade SSW REC"
+    }
+  },
+  {
+    "id": "pkg-1016",
+    "nfNumber": "001.482.925",
+    "orderNumber": "PED-98225",
+    "recipient": "Fernanda Carmo",
+    "currentStatus": "entregue",
+    "lastEvent": {
+      "dateTime": "2026-07-21T18:00:00.000Z",
+      "status": "entregue",
+      "description": "Entregue com sucesso",
+      "location": "Goiânia - GO",
+      "unit": "Unidade SSW GYN"
+    }
+  },
+  {
+    "id": "pkg-1017",
+    "nfNumber": "001.482.926",
+    "orderNumber": "PED-98226",
+    "recipient": "Diego Guimarães",
+    "currentStatus": "em_transito",
+    "lastEvent": {
+      "dateTime": "2026-07-21T10:20:00.000Z",
+      "status": "em_transito",
+      "description": "Em trânsito para a filial receptora",
+      "location": "Brasília - DF",
+      "unit": "Unidade SSW BSB"
+    }
+  },
+  {
+    "id": "pkg-1018",
+    "nfNumber": "001.482.927",
+    "orderNumber": "PED-98227",
+    "recipient": "Patricia Nunes",
+    "currentStatus": "entregue",
+    "lastEvent": {
+      "dateTime": "2026-07-20T15:35:00.000Z",
+      "status": "entregue",
+      "description": "Recebido na recepção da empresa",
+      "location": "São Paulo - SP",
+      "unit": "Unidade SSW SP"
+    }
+  },
+  {
+    "id": "pkg-1019",
+    "nfNumber": "001.482.928",
+    "orderNumber": "PED-98228",
+    "recipient": "Marcelo Augusto",
+    "currentStatus": "pendente",
+    "lastEvent": {
+      "dateTime": "2026-07-20T08:10:00.000Z",
+      "status": "pendente",
+      "description": "Pedido em separação no CD do remetente",
+      "location": "Sorocaba - SP",
+      "unit": "Unidade SSW SOD"
+    }
+  },
+  {
+    "id": "pkg-1020",
+    "nfNumber": "001.482.929",
+    "orderNumber": "PED-98229",
+    "recipient": "Aline Teixeira",
+    "currentStatus": "entregue",
+    "lastEvent": {
+      "dateTime": "2026-07-19T13:45:00.000Z",
+      "status": "entregue",
+      "description": "Entrega finalizada com assinatura digital",
+      "location": "Manaus - AM",
+      "unit": "Unidade SSW MAO"
+    }
+  },
+  {
+    "id": "pkg-1021",
+    "nfNumber": "001.482.930",
+    "orderNumber": "PED-98230",
+    "recipient": "Bruno Cesar",
+    "currentStatus": "em_transito",
+    "lastEvent": {
+      "dateTime": "2026-07-19T11:15:00.000Z",
+      "status": "em_transito",
+      "description": "Carga em viagem para unidade de destino",
+      "location": "Fortaleza - CE",
+      "unit": "Unidade SSW FOR"
+    }
+  },
+  {
+    "id": "pkg-1022",
+    "nfNumber": "001.482.931",
+    "orderNumber": "PED-98231",
+    "recipient": "Renata Vasconcelos",
+    "currentStatus": "entregue",
+    "lastEvent": {
+      "dateTime": "2026-07-18T16:50:00.000Z",
+      "status": "entregue",
+      "description": "Entregue ao próprio destinatário",
+      "location": "Vitoria - ES",
+      "unit": "Unidade SSW VIX"
+    }
+  },
+  {
+    "id": "pkg-1023",
+    "nfNumber": "001.482.932",
+    "orderNumber": "PED-98232",
+    "recipient": "Leonardo Macedo",
+    "currentStatus": "em_transferencia",
+    "lastEvent": {
+      "dateTime": "2026-07-18T09:30:00.000Z",
+      "status": "em_transferencia",
+      "description": "Transferência entre terminais autorizada",
+      "location": "Ribeirão Preto - SP",
+      "unit": "Unidade SSW RAO"
+    }
+  },
+  {
+    "id": "pkg-1024",
+    "nfNumber": "001.482.933",
+    "orderNumber": "PED-98233",
+    "recipient": "Isabela Pires",
+    "currentStatus": "pendente",
+    "lastEvent": {
+      "dateTime": "2026-07-17T14:00:00.000Z",
+      "status": "pendente",
+      "description": "Aguardandoemissão de CTE fiscal",
+      "location": "Santos - SP",
+      "unit": "Unidade SSW SSZ"
+    }
+  },
+  {
+    "id": "pkg-1025",
+    "nfNumber": "001.482.934",
+    "orderNumber": "PED-98234",
+    "recipient": "Vinicius Morales",
+    "currentStatus": "entregue",
+    "lastEvent": {
+      "dateTime": "2026-07-17T10:10:00.000Z",
+      "status": "entregue",
+      "description": "Mercadoria entregue",
+      "location": "Caxias do Sul - RS",
+      "unit": "Unidade SSW CXS"
+    }
+  },
+  {
+    "id": "pkg-1026",
+    "nfNumber": "001.482.935",
+    "orderNumber": "PED-98235",
+    "recipient": "Carolina Franco",
+    "currentStatus": "em_transito",
+    "lastEvent": {
+      "dateTime": "2026-07-16T17:20:00.000Z",
+      "status": "em_transito",
+      "description": "Saiu para entrega",
+      "location": "Natal - RN",
+      "unit": "Unidade SSW NAT"
+    }
+  },
+  {
+    "id": "pkg-1027",
+    "nfNumber": "001.482.936",
+    "orderNumber": "PED-98236",
+    "recipient": "Eduardo Paes",
+    "currentStatus": "devolvido",
+    "lastEvent": {
+      "dateTime": "2026-07-16T11:45:00.000Z",
+      "status": "devolvido",
+      "description": "Endereço não localizado pelo entregador",
+      "location": "Maceió - AL",
+      "unit": "Unidade SSW MCZ"
+    }
+  },
+  {
+    "id": "pkg-1028",
+    "nfNumber": "001.482.937",
+    "orderNumber": "PED-98237",
+    "recipient": "Luana Camargo",
+    "currentStatus": "entregue",
+    "lastEvent": {
+      "dateTime": "2026-07-15T15:00:00.000Z",
+      "status": "entregue",
+      "description": "Entregue na portaria social",
+      "location": "São José dos Campos - SP",
+      "unit": "Unidade SSW SJK"
+    }
+  },
+  {
+    "id": "pkg-1029",
+    "nfNumber": "001.482.938",
+    "orderNumber": "PED-98238",
+    "recipient": "Alexandre Frota",
+    "currentStatus": "em_transito",
+    "lastEvent": {
+      "dateTime": "2026-07-15T08:00:00.000Z",
+      "status": "em_transito",
+      "description": "Transferência rodoviária em andamento",
+      "location": "Londrina - PR",
+      "unit": "Unidade SSW LDB"
+    }
+  },
+  {
+    "id": "pkg-1030",
+    "nfNumber": "001.482.939",
+    "orderNumber": "PED-98239",
+    "recipient": "Tatiane Correa",
+    "currentStatus": "pendente",
+    "lastEvent": {
+      "dateTime": "2026-07-14T16:30:00.000Z",
+      "status": "pendente",
+      "description": "Aguardando agendamento de entrega comercial",
+      "location": "Uberlândia - MG",
+      "unit": "Unidade SSW UDI"
+    }
+  },
+  {
+    "id": "pkg-1031",
+    "nfNumber": "001.482.940",
+    "orderNumber": "PED-98240",
+    "recipient": "Gabriel Tavares",
+    "currentStatus": "entregue",
+    "lastEvent": {
+      "dateTime": "2026-07-14T12:00:00.000Z",
+      "status": "entregue",
+      "description": "Entregue com documento validado",
+      "location": "São Paulo - SP",
+      "unit": "Unidade SSW SP"
+    }
+  },
+  {
+    "id": "pkg-1032",
+    "nfNumber": "001.482.941",
+    "orderNumber": "PED-98241",
+    "recipient": "Vanessa Castro",
+    "currentStatus": "em_transito",
+    "lastEvent": {
+      "dateTime": "2026-07-13T19:10:00.000Z",
+      "status": "em_transito",
+      "description": "Saída da filial de origem",
+      "location": "Campo Grande - MS",
+      "unit": "Unidade SSW CGR"
+    }
+  },
+  {
+    "id": "pkg-1033",
+    "nfNumber": "001.482.942",
+    "orderNumber": "PED-98242",
+    "recipient": "Caio Siqueira",
+    "currentStatus": "entregue",
+    "lastEvent": {
+      "dateTime": "2026-07-13T14:40:00.000Z",
+      "status": "entregue",
+      "description": "Entrega realizada com sucesso",
+      "location": "Cuiabá - MT",
+      "unit": "Unidade SSW CGB"
+    }
+  },
+  {
+    "id": "pkg-1034",
+    "nfNumber": "001.482.943",
+    "orderNumber": "PED-98243",
+    "recipient": "Monique Evellin",
+    "currentStatus": "em_transferencia",
+    "lastEvent": {
+      "dateTime": "2026-07-12T10:15:00.000Z",
+      "status": "em_transferencia",
+      "description": "Carga re-despachada para parceiro regional",
+      "location": "Aracaju - SE",
+      "unit": "Unidade SSW AJU"
+    }
+  },
+  {
+    "id": "pkg-1035",
+    "nfNumber": "001.482.944",
+    "orderNumber": "PED-98244",
+    "recipient": "Daniel Aguiar",
+    "currentStatus": "entregue",
+    "lastEvent": {
+      "dateTime": "2026-07-12T08:50:00.000Z",
+      "status": "entregue",
+      "description": "Recebido no guichê de atendimento",
+      "location": "João Pessoa - PB",
+      "unit": "Unidade SSW JPA"
+    }
+  },
+  {
+    "id": "pkg-1036",
+    "nfNumber": "001.482.945",
+    "orderNumber": "PED-98245",
+    "recipient": "Eliane Maia",
+    "currentStatus": "pendente",
+    "lastEvent": {
+      "dateTime": "2026-07-11T16:00:00.000Z",
+      "status": "pendente",
+      "description": "Pedido em processamento logístico",
+      "location": "Teresina - PI",
+      "unit": "Unidade SSW THE"
+    }
+  },
+  {
+    "id": "pkg-1037",
+    "nfNumber": "001.482.946",
+    "orderNumber": "PED-98246",
+    "recipient": "Fábio Meireles",
+    "currentStatus": "entregue",
+    "lastEvent": {
+      "dateTime": "2026-07-11T11:20:00.000Z",
+      "status": "entregue",
+      "description": "Entrega efetuada",
+      "location": "São Luís - MA",
+      "unit": "Unidade SSW SLZ"
+    }
+  },
+  {
+    "id": "pkg-1038",
+    "nfNumber": "001.482.947",
+    "orderNumber": "PED-98247",
+    "recipient": "Gabriela Duarte",
+    "currentStatus": "em_transito",
+    "lastEvent": {
+      "dateTime": "2026-07-10T14:30:00.000Z",
+      "status": "em_transito",
+      "description": "A caminho do destinatário",
+      "location": "Belém - PA",
+      "unit": "Unidade SSW BEL"
+    }
+  },
+  {
+    "id": "pkg-1039",
+    "nfNumber": "001.482.948",
+    "orderNumber": "PED-98248",
+    "recipient": "Hugo Leonardo",
+    "currentStatus": "entregue",
+    "lastEvent": {
+      "dateTime": "2026-07-10T09:00:00.000Z",
+      "status": "entregue",
+      "description": "Entregue no endereço comercial",
+      "location": "Macapá - AP",
+      "unit": "Unidade SSW MCP"
+    }
+  },
+  {
+    "id": "pkg-1040",
+    "nfNumber": "001.482.949",
+    "orderNumber": "PED-98249",
+    "recipient": "Ingrid Rocha",
+    "currentStatus": "pendente",
+    "lastEvent": {
+      "dateTime": "2026-07-09T17:45:00.000Z",
+      "status": "pendente",
+      "description": "Aguardando liberação fiscal na barreira",
+      "location": "Palmas - TO",
+      "unit": "Unidade SSW PMW"
+    }
+  },
+  {
+    "id": "pkg-1041",
+    "nfNumber": "001.482.950",
+    "orderNumber": "PED-98250",
+    "recipient": "Gabriel Tavares",
+    "currentStatus": "entregue",
+    "lastEvent": {
+      "dateTime": "2026-07-09T13:10:00.000Z",
+      "status": "entregue",
+      "description": "Encomenda recebida pelo destinatário",
+      "location": "São Paulo - SP",
+      "unit": "Unidade SSW SP"
+    }
+  },
+  {
+    "id": "pkg-1042",
+    "nfNumber": "001.482.951",
+    "orderNumber": "PED-98251",
+    "recipient": "Jonas Brother",
+    "currentStatus": "em_transito",
+    "lastEvent": {
+      "dateTime": "2026-07-08T15:20:00.000Z",
+      "status": "em_transito",
+      "description": "Em transferência entre bases",
+      "location": "Porto Velho - RO",
+      "unit": "Unidade SSW PVH"
+    }
+  },
+  {
+    "id": "pkg-1043",
+    "nfNumber": "001.482.952",
+    "orderNumber": "PED-98252",
+    "recipient": "Karina Bacchi",
+    "currentStatus": "entregue",
+    "lastEvent": {
+      "dateTime": "2026-07-08T10:40:00.000Z",
+      "status": "entregue",
+      "description": "Entregue com sucesso",
+      "location": "Boa Vista - RR",
+      "unit": "Unidade SSW BVB"
+    }
+  },
+  {
+    "id": "pkg-1044",
+    "nfNumber": "001.482.953",
+    "orderNumber": "PED-98253",
+    "recipient": "Luiz Fernando",
+    "currentStatus": "devolvido",
+    "lastEvent": {
+      "dateTime": "2026-07-07T16:50:00.000Z",
+      "status": "devolvido",
+      "description": "Recusado pelo destinatário",
+      "location": "Rio Branco - AC",
+      "unit": "Unidade SSW RBR"
+    }
+  },
+  {
+    "id": "pkg-1045",
+    "nfNumber": "001.482.954",
+    "orderNumber": "PED-98254",
+    "recipient": "Manuela Diniz",
+    "currentStatus": "entregue",
+    "lastEvent": {
+      "dateTime": "2026-07-07T11:00:00.000Z",
+      "status": "entregue",
+      "description": "Entregue na recepção principal",
+      "location": "São Paulo - SP",
+      "unit": "Unidade SSW SP"
+    }
+  },
+  {
+    "id": "pkg-1046",
+    "nfNumber": "001.482.955",
+    "orderNumber": "PED-98255",
+    "recipient": "Nivaldo Batista",
+    "currentStatus": "em_transito",
+    "lastEvent": {
+      "dateTime": "2026-07-06T14:15:00.000Z",
+      "status": "em_transito",
+      "description": "Em trânsito para a cidade de destino",
+      "location": "Bauru - SP",
+      "unit": "Unidade SSW BAU"
+    }
+  },
+  {
+    "id": "pkg-1047",
+    "nfNumber": "001.482.956",
+    "orderNumber": "PED-98256",
+    "recipient": "Olivia Colman",
+    "currentStatus": "entregue",
+    "lastEvent": {
+      "dateTime": "2026-07-06T09:30:00.000Z",
+      "status": "entregue",
+      "description": "Entrega finalizada",
+      "location": "Piracicaba - SP",
+      "unit": "Unidade SSW PIR"
+    }
+  },
+  {
+    "id": "pkg-1048",
+    "nfNumber": "001.482.957",
+    "orderNumber": "PED-98257",
+    "recipient": "Paulo Coelho",
+    "currentStatus": "pendente",
+    "lastEvent": {
+      "dateTime": "2026-07-05T18:00:00.000Z",
+      "status": "pendente",
+      "description": "Aguardando retirada no balcão da filial",
+      "location": "Marília - SP",
+      "unit": "Unidade SSW MII"
+    }
+  },
+  {
+    "id": "pkg-1049",
+    "nfNumber": "001.482.958",
+    "orderNumber": "PED-98258",
+    "recipient": "Quiteria Chagas",
+    "currentStatus": "entregue",
+    "lastEvent": {
+      "dateTime": "2026-07-05T12:20:00.000Z",
+      "status": "entregue",
+      "description": "Entregue no endereço indicado",
+      "location": "Presidente Prudente - SP",
+      "unit": "Unidade SSW PPB"
+    }
+  },
+  {
+    "id": "pkg-1050",
+    "nfNumber": "001.482.959",
+    "orderNumber": "PED-98259",
+    "recipient": "Rafael Nadal",
+    "currentStatus": "em_transito",
+    "lastEvent": {
+      "dateTime": "2026-07-04T15:40:00.000Z",
+      "status": "em_transito",
+      "description": "Mercadoria em rota de distribuição",
+      "location": "Franca - SP",
+      "unit": "Unidade SSW FRC"
+    }
+  }
+]

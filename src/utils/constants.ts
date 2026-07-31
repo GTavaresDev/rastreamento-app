@@ -9,9 +9,9 @@ export const SAMPLE_CPF = "00644516151";
 
 export const STATUS_LABELS: Record<string, string> = {
   entregue: "Entregue",
-  em_transito: "Em trânsito",
-  em_transferencia: "Em transferência",
-  pendente: "Pendente",
+  em_transito: "A caminho",
+  em_transferencia: "A caminho",
+  pendente: "Pedido",
   devolvido: "Devolvido",
 };
 
@@ -28,8 +28,8 @@ export const STATUS_STYLES: Record<
     dot: "bg-amber-500",
   },
   em_transferencia: {
-    badge: "bg-blue-50 text-blue-700",
-    dot: "bg-blue-500",
+    badge: "bg-amber-50 text-amber-700",
+    dot: "bg-amber-500",
   },
   pendente: {
     badge: "bg-slate-100 text-slate-600",
