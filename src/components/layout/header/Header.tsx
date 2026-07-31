@@ -16,6 +16,7 @@ export function Header() {
             height={40}
             className="h-10 w-10 rounded-xl object-contain"
             priority
+            unoptimized
           />
           <div>
             <p className="text-sm font-semibold tracking-[0.18em] text-slate-500 uppercase">

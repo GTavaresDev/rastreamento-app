@@ -17,6 +17,7 @@ export default function LoginPage() {
               height={48}
               className="h-12 w-12 rounded-xl object-contain"
               priority
+              unoptimized
             />
             <span className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
               {APP_NAME}

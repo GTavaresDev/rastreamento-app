@@ -71,6 +71,7 @@ export function AppSidebar() {
             width={56}
             height={56}
             className="h-14 w-14 rounded-xl object-contain"
+            unoptimized
           />
           <div className="flex flex-col">
             <span className="text-base font-bold tracking-tight text-sidebar-foreground">
