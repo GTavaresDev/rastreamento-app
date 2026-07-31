@@ -17,9 +17,9 @@ export const metadata: Metadata = {
   title: APP_NAME,
   description: "Rastreie encomendas por CPF no SSW.",
   icons: {
-    icon: "/images/hyerlogo.jpg",
-    shortcut: "/images/hyerlogo.jpg",
-    apple: "/images/hyerlogo.jpg",
+    icon: "/images/sacflow-icon.svg",
+    shortcut: "/images/sacflow-icon.svg",
+    apple: "/images/sacflow-icon.svg",
   },
 };
 
@@ -39,7 +39,7 @@ export default function RootLayout({
         geist.variable
       )}
     >
-      <body className="min-h-full bg-slate-50 text-slate-900">
+      <body className="min-h-full bg-slate-100/70 text-slate-900">
         <TooltipProvider>{children}</TooltipProvider>
       </body>
     </html>
