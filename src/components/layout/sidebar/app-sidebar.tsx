@@ -109,7 +109,7 @@ export function AppSidebar() {
                           active ? "text-slate-900" : "text-slate-700"
                         }`}
                       />
-                      <span className="text-base font-semibold">{item.title}</span>
+                      <span className="text-sm font-semibold">{item.title}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 );
@@ -119,17 +119,17 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="border-t border-sidebar-border p-4">
-        <div className="flex items-center justify-between gap-3 rounded-xl bg-slate-100/80 p-3">
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-900 text-white font-bold text-sm">
-              {userName ? userName.charAt(0).toUpperCase() : <User className="h-4 w-4" />}
+      <SidebarFooter className="border-t border-sidebar-border p-3">
+        <div className="flex items-center justify-between gap-2 rounded-xl bg-slate-100/80 p-2.5">
+          <div className="flex items-center gap-2 min-w-0">
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-900 text-white font-bold text-xs">
+              {userName ? userName.charAt(0).toUpperCase() : <User className="h-3.5 w-3.5" />}
             </div>
             <div className="flex flex-col min-w-0">
-              <span className="truncate text-sm font-semibold text-slate-900">
+              <span className="truncate text-xs font-semibold text-slate-900">
                 {userName || "Usuário"}
               </span>
-              <span className="truncate text-xs text-slate-500">
+              <span className="truncate text-[11px] text-slate-500">
                 {userCpf || "CPF não informado"}
               </span>
             </div>
@@ -137,9 +137,9 @@ export function AppSidebar() {
           <Link
             href="/login"
             title="Alterar usuário / Sair"
-            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-colors"
+            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-colors"
           >
-            <LogOut className="h-4 w-4" />
+            <LogOut className="h-3.5 w-3.5" />
           </Link>
         </div>
       </SidebarFooter>
