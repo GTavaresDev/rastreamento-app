@@ -5,7 +5,7 @@ import { APP_NAME } from "@/utils/constants";
 
 export default function LoginPage() {
   return (
-    <main className="flex min-h-screen w-full items-center justify-center bg-slate-100/70 px-4 py-12 sm:px-6 lg:px-8">
+    <main className="flex min-h-screen w-full items-center justify-center bg-neutral-100 px-4 py-12 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-6">
         {/* Branding & Logo: Icon and Name side-by-side */}
         <div className="flex justify-center">

@@ -1,25 +1,22 @@
 import type { Metadata } from "next";
-import { Inter, Geist } from "next/font/google";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { APP_NAME } from "@/utils/constants";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import { cn } from "@/utils/tailwind.util";
-
-const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
+import { APP_NAME } from "@/utils/constants";
 
 const inter = Inter({
-  variable: "--font-inter",
   subsets: ["latin"],
-  display: "swap",
+  variable: "--font-sans",
 });
 
 export const metadata: Metadata = {
-  title: APP_NAME,
-  description: "Rastreie encomendas por CPF no SSW.",
+  title: `${APP_NAME} - Rastreamento Logístico`,
+  description: "Consulta de encomendas por CPF",
   icons: {
-    icon: "/images/sacflow-icon.svg",
-    shortcut: "/images/sacflow-icon.svg",
-    apple: "/images/sacflow-icon.svg",
+    icon: [
+      { url: "/images/sacflow-icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: [{ url: "/images/sacflow-icon.svg", type: "image/svg+xml" }],
   },
 };
 
@@ -29,18 +26,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="pt-BR"
-      className={cn(
-        "h-full",
-        "antialiased",
-        inter.variable,
-        "font-sans",
-        geist.variable
-      )}
-    >
-      <body className="min-h-full bg-slate-100/70 text-slate-900">
-        <TooltipProvider>{children}</TooltipProvider>
+    <html lang="pt-BR" className="h-full">
+      <body
+        className={`${inter.variable} min-h-full bg-neutral-100 text-slate-900 font-sans antialiased`}
+      >
+        {children}
       </body>
     </html>
   );
