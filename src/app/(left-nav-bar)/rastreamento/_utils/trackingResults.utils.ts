@@ -27,8 +27,6 @@ export function matchesStatusFilter(
   return status === filter;
 }
 
-export function getDetailUrl(id: string, cpf?: string): string {
-  return cpf
-    ? `/rastreamento/detalhes/${id}?cpf=${encodeURIComponent(cpf)}`
-    : `/rastreamento/detalhes/${id}`;
+export function getDetailUrl(id: string): string {
+  return `/rastreamento/detalhes/${id}`;
 }

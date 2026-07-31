@@ -50,6 +50,6 @@ export function useTrackingResults({ items, cpf }: UseTrackingResultsProps) {
     statusFilters: STATUS_FILTERS,
     filteredItems,
     router,
-    getDetailUrl: (id: string) => getDetailUrl(id, cpf),
+    getDetailUrl: (id: string) => getDetailUrl(id),
   };
 }
