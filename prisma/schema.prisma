@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id             Int             @id @default(autoincrement()) @map("id")
+  name           String          @db.VarChar(120) @map("name")
+  email          String          @unique @db.VarChar(255) @map("email")
+  cpf            String          @unique @db.VarChar(11) @map("cpf")
+  password       String          @db.VarChar(255) @map("password")
+  permission     Int             @default(0) @map("permission")
+  userPermission UserPermission?
+  createdAt      DateTime        @default(now()) @map("created_at")
+  updatedAt      DateTime        @default(now()) @updatedAt @map("updated_at")
+
+  @@map("USER")
+}
+
+model UserPermission {
+  id     Int    @id @default(autoincrement()) @map("id")
+  userId Int    @unique @map("user_id")
+  name   String @db.VarChar(120) @map("name")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("USER_PERMISSION")
+}

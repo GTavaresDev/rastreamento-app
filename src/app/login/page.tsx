@@ -7,7 +7,6 @@ export default function LoginPage() {
   return (
     <main className="flex min-h-screen w-full items-center justify-center bg-neutral-100 px-4 py-12 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-6">
-        {/* Branding & Logo: Icon and Name side-by-side */}
         <div className="flex justify-center">
           <div className="flex items-center justify-center gap-3">
             <Image
@@ -25,7 +24,6 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Login Form Card */}
         <Card className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-7">
           <LoginForm />
         </Card>

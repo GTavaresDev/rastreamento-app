@@ -3,8 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { LayoutGrid, MapPin, User, LogOut } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { LayoutGrid, MapPin, User, LogOut, Users } from "lucide-react";
 
 import {
   Sidebar,
@@ -18,8 +18,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { APP_NAME } from "@/utils/constants";
-import { getStoredUserName, getStoredCpf } from "@core/infra/store/userStore";
-import { maskCpf } from "@core/domain/common/utils/formatters/cpf.formatter";
+import { removeStoredUser } from "@core/infra/store/userStore";
 
 type NavItem = {
   title: string;
@@ -28,7 +27,7 @@ type NavItem = {
   matchPrefix?: string;
 };
 
-const items: NavItem[] = [
+const baseItems: NavItem[] = [
   {
     title: "Início",
     url: "/dashboard",
@@ -42,17 +41,34 @@ const items: NavItem[] = [
   },
 ];
 
-export function AppSidebar() {
-  const pathname = usePathname();
-  const [userName, setUserName] = useState<string>("");
-  const [userCpf, setUserCpf] = useState<string>("");
+type SidebarUser = {
+  name: string;
+  email: string;
+  permission: number;
+};
 
-  useEffect(() => {
-    const storedName = getStoredUserName();
-    const storedCpf = getStoredCpf();
-    if (storedName) setUserName(storedName);
-    if (storedCpf) setUserCpf(maskCpf(storedCpf));
-  }, [pathname]);
+export function AppSidebar({ user }: { user: SidebarUser }) {
+  const pathname = usePathname();
+  const router = useRouter();
+  const items =
+    user.permission === 1
+      ? [
+          ...baseItems,
+          {
+            title: "Usuários",
+            url: "/usuarios",
+            icon: Users,
+            matchPrefix: "/usuarios",
+          },
+        ]
+      : baseItems;
+
+  async function handleLogout() {
+    await fetch("/api/auth/logout", { method: "POST" });
+    removeStoredUser();
+    router.replace("/login");
+    router.refresh();
+  }
 
   function isItemActive(item: NavItem) {
     if (item.matchPrefix) {
@@ -126,24 +142,25 @@ export function AppSidebar() {
         <div className="flex items-center justify-between gap-2 rounded-xl bg-neutral-200/60 p-2.5">
           <div className="flex items-center gap-2 min-w-0">
             <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-neutral-900 text-white font-bold text-xs">
-              {userName ? userName.charAt(0).toUpperCase() : <User className="h-3.5 w-3.5" />}
+              {user.name ? user.name.charAt(0).toUpperCase() : <User className="h-3.5 w-3.5" />}
             </div>
             <div className="flex flex-col min-w-0">
               <span className="truncate text-xs font-semibold text-neutral-900">
-                {userName || "Usuário"}
+                {user.name || "Usuário"}
               </span>
               <span className="truncate text-[11px] text-neutral-500">
-                {userCpf || "CPF não informado"}
+                {user.email}
               </span>
             </div>
           </div>
-          <Link
-            href="/login"
-            title="Alterar usuário / Sair"
+          <button
+            type="button"
+            onClick={handleLogout}
+            title="Sair"
             className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-neutral-500 hover:bg-neutral-300 hover:text-neutral-900 transition-colors"
           >
             <LogOut className="h-3.5 w-3.5" />
-          </Link>
+          </button>
         </div>
       </SidebarFooter>
     </Sidebar>

@@ -5,10 +5,8 @@ import type {
   TrackingError,
 } from "@/types";
 
-export async function getTrackingByCpfClient(
-  cpf: string
-): Promise<PackageSummary[]> {
-  const response = await fetch(`/api/tracking?cpf=${encodeURIComponent(cpf)}`);
+export async function getTrackingByCpfClient(): Promise<PackageSummary[]> {
+  const response = await fetch("/api/tracking");
 
   if (!response.ok) {
     const errorBody = (await response.json().catch(() => null)) as {
@@ -24,12 +22,8 @@ export async function getTrackingByCpfClient(
 
 export async function getTrackingDetailClient(
   trackingId: string,
-  cpf?: string
 ): Promise<PackageDetail> {
   const queryParams = new URLSearchParams({ trackingId });
-  if (cpf) {
-    queryParams.set("cpf", cpf);
-  }
 
   const response = await fetch(`/api/tracking/detail?${queryParams}`);
   const payload = (await response.json()) as

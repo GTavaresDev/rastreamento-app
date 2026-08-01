@@ -1,93 +1,71 @@
 "use client";
 
-import { useState, useEffect, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { maskCpf } from "@core/domain/common/utils/formatters/cpf.formatter";
 import {
-  validateCpf,
-  getValidationMessage,
-} from "@core/domain/common/utils/validators/cpf.validator";
-import {
-  getStoredCpf,
+  removeStoredUser,
   setStoredCpf,
-  getStoredUserName,
   setStoredUserName,
 } from "@core/infra/store/userStore";
 
+type LoginResponse = {
+  error?: string;
+  user?: {
+    name: string;
+    cpf: string;
+  };
+};
+
 export function useLoginForm() {
   const router = useRouter();
-  const [name, setName] = useState("");
-  const [nameTouched, setNameTouched] = useState(false);
-  const [cpf, setCpf] = useState("");
-  const [cpfTouched, setCpfTouched] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  useEffect(() => {
-    const storedCpf = getStoredCpf();
-    if (storedCpf) {
-      setCpf(maskCpf(storedCpf));
-    }
-    const storedName = getStoredUserName();
-    if (storedName) {
-      setName(storedName);
-    }
-  }, []);
-
-  const cpfValidationMessage = getValidationMessage(cpf, cpfTouched);
-  const nameValidationMessage =
-    nameTouched && !name.trim() ? "Informe seu nome." : "";
-
-  function handleNameChange(value: string) {
-    setName(value);
-    setError("");
-  }
-
-  function handleNameBlur() {
-    setNameTouched(true);
-  }
-
-  function handleCpfChange(value: string) {
-    setCpf(maskCpf(value));
-    setError("");
-  }
-
-  function handleCpfBlur() {
-    setCpfTouched(true);
-  }
-
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setNameTouched(true);
-    setCpfTouched(true);
-
-    if (!name.trim()) {
-      setError("Informe seu nome para continuar.");
-      return;
-    }
-
-    const validation = validateCpf(cpf);
-
-    if (!validation.valid) {
-      setError("Informe um CPF válido para continuar.");
-      return;
-    }
-
     setError("");
-    setStoredUserName(name);
-    setStoredCpf(validation.cleaned);
-    router.push("/dashboard");
+
+    if (!email.trim() || !password) {
+      setError("Informe seu e-mail e senha.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = (await response.json()) as LoginResponse;
+
+      if (!response.ok || !data.user) {
+        setError(data.error ?? "Não foi possível entrar.");
+        return;
+      }
+
+      removeStoredUser();
+      setStoredUserName(data.user.name);
+      setStoredCpf(data.user.cpf);
+      router.replace("/dashboard");
+      router.refresh();
+    } catch {
+      setError("Não foi possível conectar ao servidor.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return {
-    name,
-    nameValidationMessage,
-    handleNameChange,
-    handleNameBlur,
-    cpf,
-    cpfValidationMessage,
-    handleCpfChange,
-    handleCpfBlur,
+    email,
+    setEmail,
+    password,
+    setPassword,
     error,
+    isSubmitting,
     handleSubmit,
   };
 }

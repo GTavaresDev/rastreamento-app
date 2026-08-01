@@ -2,29 +2,63 @@
 
 import { useEffect, useMemo, useState } from "react";
 import type { PackageSummary } from "@/types";
-import { useRequireCpfAuth } from "@/app/login/_hooks/useRequireCpfAuth";
+import { getTrackingByCpfClient } from "@/services/trackingClient.gateway";
+import { parseSswDateTime } from "@core/domain/common/utils/formatters/date.formatter";
 import mockData from "../_mocks/data.json";
 
-export function useDashboardData() {
-  const { activeCpf, userName, isChecking: isAuthChecking } = useRequireCpfAuth();
+export function useDashboardData(useMockData: boolean) {
   const [packages, setPackages] = useState<PackageSummary[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [reloadKey, setReloadKey] = useState(0);
 
   useEffect(() => {
     let active = true;
+    let timer: ReturnType<typeof setTimeout> | undefined;
 
-    const timer = setTimeout(() => {
-      if (active) {
-        setPackages(mockData as PackageSummary[]);
-        setLoading(false);
+    async function loadDashboard() {
+      setLoading(true);
+      setError("");
+
+      if (useMockData) {
+        timer = setTimeout(() => {
+          if (active) {
+            setPackages(mockData as PackageSummary[]);
+            setLoading(false);
+          }
+        }, 200);
+        return;
       }
-    }, 200);
+
+      try {
+        const data = await getTrackingByCpfClient();
+
+        if (active) {
+          setPackages(data);
+        }
+      } catch (loadError) {
+        if (active) {
+          setPackages([]);
+          setError(
+            loadError instanceof Error
+              ? loadError.message
+              : "Falha de rede ao carregar seus rastreamentos.",
+          );
+        }
+      } finally {
+        if (active) {
+          setLoading(false);
+        }
+      }
+    }
+
+    void loadDashboard();
 
     return () => {
       active = false;
-      clearTimeout(timer);
+      if (timer) clearTimeout(timer);
     };
-  }, []);
+  }, [reloadKey, useMockData]);
 
   const stats = useMemo(() => {
     let pedidoCount = 0;
@@ -48,7 +82,6 @@ export function useDashboardData() {
     }
 
     const total = packages.length;
-
     const calcPercentage = (count: number) =>
       total > 0 ? Math.round((count / total) * 100) : 0;
 
@@ -65,16 +98,24 @@ export function useDashboardData() {
     };
   }, [packages]);
 
-  const recentPackages = useMemo(() => {
-    return packages.slice(0, 5);
-  }, [packages]);
+  const recentPackages = useMemo(
+    () =>
+      [...packages]
+        .sort((left, right) => {
+          const leftDate = parseSswDateTime(left.lastEvent.dateTime)?.getTime() ?? 0;
+          const rightDate = parseSswDateTime(right.lastEvent.dateTime)?.getTime() ?? 0;
+          return rightDate - leftDate;
+        })
+        .slice(0, 5),
+    [packages],
+  );
 
   return {
-    activeCpf,
-    userName,
     packages,
     recentPackages,
     stats,
-    loading: isAuthChecking || loading,
+    loading,
+    error,
+    reload: () => setReloadKey((current) => current + 1),
   };
 }

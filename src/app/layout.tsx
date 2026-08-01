@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Geist } from "next/font/google";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { APP_NAME } from "@/utils/constants";
+import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 import { cn } from "@/utils/tailwind.util";
 
@@ -14,8 +15,24 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: APP_NAME,
+  metadataBase: getSiteUrl(),
+  title: {
+    default: APP_NAME,
+    template: `%s | ${APP_NAME}`,
+  },
   description: "Rastreie encomendas por CPF no SSW.",
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    siteName: APP_NAME,
+    title: APP_NAME,
+    description: "Painel logístico e rastreamento de encomendas por CPF.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: APP_NAME,
+    description: "Painel logístico e rastreamento de encomendas por CPF.",
+  },
   icons: {
     icon: "/images/sacflow-icon.svg",
     shortcut: "/images/sacflow-icon.svg",

@@ -1,5 +1,6 @@
 import * as cheerio from "cheerio";
 import { NextResponse } from "next/server";
+import { getCurrentUser } from "@/lib/auth";
 import { getTrackingByCpf } from "@core/domain/tracking/tracking";
 import { getTrackingDetailById } from "@core/domain/tracking/tracking-detail";
 import type { ScraperError, SswFormFields } from "@/types";
@@ -7,6 +8,11 @@ import { REQUEST_TIMEOUT_MS, SSW_BASE_URL, SSW_TRACKING_URL } from "@/utils/cons
 
 const USER_AGENT =
   "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123 Safari/537.36";
+
+function isMissingSender(value: string) {
+  const normalized = value.trim().toLocaleLowerCase("pt-BR");
+  return !normalized || normalized === "informação indisponível";
+}
 
 function createScraperError(
   code: ScraperError["code"],
@@ -174,13 +180,21 @@ export async function scrapeTrackingDetail(detailPath: string): Promise<string> 
   return html;
 }
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const cpf = searchParams.get("cpf") ?? "";
-
+export async function GET() {
   try {
-    const packages = await getTrackingByCpf(cpf);
-    return NextResponse.json(packages);
+    const user = await getCurrentUser();
+
+    if (!user) {
+      return NextResponse.json({ error: "Acesso não autorizado." }, { status: 401 });
+    }
+
+    const packages = await getTrackingByCpf(user.cpf);
+    return NextResponse.json(
+      packages.map((item) => ({
+        ...item,
+        recipient: isMissingSender(item.recipient) ? user.name : item.recipient,
+      })),
+    );
   } catch (error) {
     const status =
       error instanceof Error && "code" in error && String(error.code) === "INVALID_CPF"
@@ -195,12 +209,25 @@ export async function GET(request: Request) {
 
 export async function GET_DETAIL(request: Request) {
   const { searchParams } = new URL(request.url);
-  const cpf = searchParams.get("cpf") ?? "";
   const trackingId = searchParams.get("trackingId") ?? "";
 
   try {
-    const data = await getTrackingDetailById(cpf, trackingId);
-    return NextResponse.json(data);
+    const user = await getCurrentUser();
+
+    if (!user) {
+      return NextResponse.json({ error: "Acesso não autorizado." }, { status: 401 });
+    }
+
+    const data = await getTrackingDetailById(user.cpf, trackingId);
+    return NextResponse.json({
+      ...data,
+      data: {
+        ...data.data,
+        recipient: isMissingSender(data.data.recipient)
+          ? user.name
+          : data.data.recipient,
+      },
+    });
   } catch (error) {
     const status =
       error instanceof Error && "code" in error

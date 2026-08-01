@@ -1,41 +1,47 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useSyncExternalStore } from "react";
 import { validateCpf } from "@core/domain/common/utils/validators/cpf.validator";
-import { getStoredCpf, setStoredCpf, getStoredUserName } from "@core/infra/store/userStore";
+import { getStoredCpf, getStoredUserName, setStoredCpf } from "@core/infra/store/userStore";
+
+function subscribeToStorage(onStoreChange: () => void) {
+  window.addEventListener("storage", onStoreChange);
+  return () => window.removeEventListener("storage", onStoreChange);
+}
+
+function getServerSnapshot() {
+  return null;
+}
 
 export function useRequireCpfAuth(initialCpf?: string | null) {
-  const router = useRouter();
-  const [activeCpf, setActiveCpf] = useState<string | null>(
-    initialCpf ?? null
+  const storedCpf = useSyncExternalStore(
+    subscribeToStorage,
+    getStoredCpf,
+    getServerSnapshot,
   );
-  const [userName, setUserName] = useState<string>("");
-  const [isChecking, setIsChecking] = useState<boolean>(!initialCpf);
+  const userName =
+    useSyncExternalStore(
+      subscribeToStorage,
+      getStoredUserName,
+      getServerSnapshot,
+    ) ?? "";
+
+  const initialValidation = initialCpf ? validateCpf(initialCpf) : null;
+  const storedValidation = storedCpf ? validateCpf(storedCpf) : null;
+  const initialCleaned = initialValidation?.valid
+    ? initialValidation.cleaned
+    : null;
+  const activeCpf = initialValidation?.valid
+    ? initialValidation.cleaned
+    : storedValidation?.valid
+      ? storedValidation.cleaned
+      : null;
 
   useEffect(() => {
-    const storedName = getStoredUserName() ?? "";
-    setUserName(storedName);
-
-    if (initialCpf) {
-      const validation = validateCpf(initialCpf);
-      if (validation.valid) {
-        setStoredCpf(validation.cleaned);
-        setActiveCpf(validation.cleaned);
-        setIsChecking(false);
-        return;
-      }
+    if (initialCleaned) {
+      setStoredCpf(initialCleaned);
     }
+  }, [initialCleaned]);
 
-    const storedCpf = getStoredCpf();
-    if (storedCpf && validateCpf(storedCpf).valid) {
-      setActiveCpf(storedCpf);
-      setIsChecking(false);
-      return;
-    }
-
-    router.replace("/login");
-  }, [initialCpf, router]);
-
-  return { activeCpf, userName, isChecking };
+  return { activeCpf, userName, isChecking: false };
 }

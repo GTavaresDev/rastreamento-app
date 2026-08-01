@@ -21,11 +21,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { useTrackingResults } from "../_hooks/useTrackingResults";
 import { TrackingFilterBar } from "./TrackingFilterBar";
 import { TrackingRow } from "./TrackingRow";
@@ -33,10 +28,9 @@ import { TrackingRow } from "./TrackingRow";
 type PackageListProps = {
   items: PackageSummary[];
   scrapedAt?: string;
-  cpf?: string;
 };
 
-export function PackageList({ items, scrapedAt, cpf }: PackageListProps) {
+export function PackageList({ items, scrapedAt }: PackageListProps) {
   const {
     statusFilter,
     setStatusFilter,
@@ -44,7 +38,7 @@ export function PackageList({ items, scrapedAt, cpf }: PackageListProps) {
     filteredItems,
     router,
     getDetailUrl,
-  } = useTrackingResults({ items, cpf });
+  } = useTrackingResults({ items });
 
   const columns: ColumnDef<PackageSummary>[] = useMemo(
     () => [

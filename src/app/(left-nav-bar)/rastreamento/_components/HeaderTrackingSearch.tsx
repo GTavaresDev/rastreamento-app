@@ -2,16 +2,15 @@
 
 import { Suspense } from "react";
 import { Search } from "lucide-react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { useTrackingSearch } from "../_context/TrackingSearchContext";
 
 function HeaderTrackingSearchContent() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const { query, setQuery } = useTrackingSearch();
 
-  if (pathname !== "/rastreamento" || !searchParams.get("cpf")) {
+  if (pathname !== "/rastreamento") {
     return null;
   }
 

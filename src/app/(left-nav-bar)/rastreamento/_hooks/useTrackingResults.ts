@@ -14,10 +14,9 @@ import {
 
 type UseTrackingResultsProps = {
   items: PackageSummary[];
-  cpf?: string;
 };
 
-export function useTrackingResults({ items, cpf }: UseTrackingResultsProps) {
+export function useTrackingResults({ items }: UseTrackingResultsProps) {
   const router = useRouter();
   const { query } = useTrackingSearch();
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");

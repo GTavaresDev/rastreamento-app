@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import type { PackageSummary } from "@/types";
 import { getTrackingByCpfClient } from "@/services/trackingClient.gateway";
 
-export function useTrackingData(cpf: string) {
+export function useTrackingData() {
   const [packages, setPackages] = useState<PackageSummary[]>([]);
   const [scrapedAt, setScrapedAt] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
@@ -18,7 +18,7 @@ export function useTrackingData(cpf: string) {
       setError("");
 
       try {
-        const data = await getTrackingByCpfClient(cpf);
+        const data = await getTrackingByCpfClient();
         if (active) {
           setPackages(data);
           setScrapedAt(new Date().toISOString());
@@ -44,7 +44,7 @@ export function useTrackingData(cpf: string) {
     return () => {
       active = false;
     };
-  }, [cpf]);
+  }, []);
 
   return { packages, scrapedAt, loading, error };
 }

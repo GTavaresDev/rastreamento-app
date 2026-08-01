@@ -15,6 +15,10 @@ function getActiveRouteTitle(pathname: string) {
     return "Rastreamento";
   }
 
+  if (pathname.startsWith("/usuarios")) {
+    return "Usuários";
+  }
+
   return APP_NAME;
 }
 

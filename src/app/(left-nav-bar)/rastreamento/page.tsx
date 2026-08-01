@@ -1,30 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { useRequireCpfAuth } from "@/app/login/_hooks/useRequireCpfAuth";
 import { PackageListLoading } from "./_components/TrackingLoadingStates";
 import { PackageList } from "./_components/TrackingResultsList";
 import { useTrackingData } from "./_hooks/useTrackingData";
 
 export default function RastreamentoPage() {
-  const searchParams = useSearchParams();
-  const rawCpf = searchParams.get("cpf") ?? "";
+  const { packages, scrapedAt, loading, error } = useTrackingData();
 
-  const { activeCpf, isChecking } = useRequireCpfAuth(rawCpf);
-  const { packages, scrapedAt, loading, error } = useTrackingData(
-    activeCpf ?? ""
-  );
-
-  if (isChecking || (activeCpf && loading)) {
+  if (loading) {
     return <PackageListLoading />;
-  }
-
-  if (!activeCpf) {
-    return null;
   }
 
   if (error) {
@@ -33,8 +21,8 @@ export default function RastreamentoPage() {
         <div className="w-full">
           <Alert tone="error">{error}</Alert>
           <div className="mt-4">
-            <Link href="/login">
-              <Button type="button">Tentar outro CPF</Button>
+            <Link href="/dashboard">
+              <Button type="button">Voltar ao início</Button>
             </Link>
           </div>
         </div>
@@ -54,8 +42,8 @@ export default function RastreamentoPage() {
             O SSW não retornou pacotes vinculados ao CPF informado.
           </p>
           <div className="mt-6">
-            <Link href="/login">
-              <Button type="button">Alterar CPF</Button>
+            <Link href="/dashboard">
+              <Button type="button">Voltar ao início</Button>
             </Link>
           </div>
         </Card>
@@ -65,7 +53,7 @@ export default function RastreamentoPage() {
 
   return (
     <div className="w-full p-0 m-0">
-      <PackageList items={packages} scrapedAt={scrapedAt} cpf={activeCpf} />
+      <PackageList items={packages} scrapedAt={scrapedAt} />
     </div>
   );
 }

@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useParams, useSearchParams } from "next/navigation";
-import { useRequireCpfAuth } from "@/app/login/_hooks/useRequireCpfAuth";
+import { useParams } from "next/navigation";
 import { useTrackingDetail } from "../_hooks/useTrackingDetail";
 import { PackageDetail } from "../_components/PackageDetail";
 import { PackageDetailLoading } from "../_components/TrackingLoadingStates";
@@ -11,19 +10,12 @@ import { Button } from "@/components/ui/button";
 
 export default function RastreamentoDetalhesPage() {
   const params = useParams<{ detalhes?: string[] }>();
-  const searchParams = useSearchParams();
 
   const detalhesSegments = params.detalhes ?? [];
   const trackingId = detalhesSegments[detalhesSegments.length - 1] ?? "";
-  const queryCpf = searchParams.get("cpf") ?? "";
+  const { item, loading, error } = useTrackingDetail(trackingId);
 
-  const { activeCpf, isChecking } = useRequireCpfAuth(queryCpf);
-  const { item, loading, error } = useTrackingDetail(
-    trackingId,
-    activeCpf ?? undefined
-  );
-
-  if (isChecking || loading) {
+  if (loading) {
     return <PackageDetailLoading />;
   }
 

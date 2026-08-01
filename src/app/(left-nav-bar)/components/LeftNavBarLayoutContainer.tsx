@@ -9,12 +9,18 @@ import { TrackingSearchProvider } from "../rastreamento/_context/TrackingSearchC
 
 export function LeftNavBarLayoutContainer({
   children,
+  user,
 }: {
   children: React.ReactNode;
+  user: {
+    name: string;
+    email: string;
+    permission: number;
+  };
 }) {
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar user={user} />
       <TrackingSearchProvider>
         <div className="flex flex-1 flex-col min-w-0 bg-neutral-100">
           {/* Fixed Top Header */}

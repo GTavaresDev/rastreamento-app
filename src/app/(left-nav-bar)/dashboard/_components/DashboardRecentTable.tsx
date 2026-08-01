@@ -7,7 +7,6 @@ import { PackageSearch } from "lucide-react";
 
 type DashboardRecentTableProps = {
   items: PackageSummary[];
-  cpf?: string;
 };
 
 export function DashboardRecentTable({
